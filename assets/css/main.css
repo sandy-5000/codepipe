@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .a-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .h-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .app-bg {
+    background-color: #000101;
+  }
+}
+
+.pixel {
+  font-feature-settings: 'ss15';
+}
