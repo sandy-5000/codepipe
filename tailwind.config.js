@@ -11,7 +11,8 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        y: '0 0px 5px rgba(255, 255, 255, 0.5)',
+        light: '0 0 3px rgba(255, 255, 255, 0.5)',
+        normal: '0 0 6px rgba(255, 255, 255, 0.5)',
       },
     },
   },

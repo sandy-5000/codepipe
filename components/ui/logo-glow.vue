@@ -6,7 +6,7 @@
     }"
   >
     <ui-logo
-      class="absolute group-hover:blur-xl z-[0] left-0 right-0 h-full"
+      class="absolute group-hover:blur-md z-[0] left-0 right-0 h-full"
     ></ui-logo>
     <ui-logo class="absolute z-[1] left-0 right-0 h-full"></ui-logo>
     <ui-logo
