@@ -28,8 +28,26 @@
     justify-content: center;
   }
 
-  .app-bg {
-    background-color: #000101;
+  .bg-site {
+    background-color: #314552;
+    background-color: #0d1519;
+  }
+
+  .text-app {
+    color: #ff9900;
+  }
+
+  .bg-app {
+    background-color: #ff9900;
+  }
+}
+
+.h-app-screen {
+  min-height: calc(100vh - 150px);
+}
+@media (min-width: 640px) {
+  .h-app-screen {
+    min-height: calc(100vh - 135px);
   }
 }
 

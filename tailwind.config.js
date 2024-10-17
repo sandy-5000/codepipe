@@ -9,7 +9,11 @@ export default {
     './error.vue',
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        y: '0 0px 5px rgba(255, 255, 255, 0.5)',
+      },
+    },
   },
   plugins: [],
 }
