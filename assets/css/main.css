@@ -10,6 +10,10 @@
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: #0d1519;
+}
+
 @layer utilities {
   .a-center {
     display: flex;
