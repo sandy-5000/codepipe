@@ -28,9 +28,20 @@
     justify-content: center;
   }
 
+  .m-container {
+    @apply px-5 md:px-16 lg:px-32 xl:px-40;
+  }
+
   .bg-site {
-    background-color: #314552;
     background-color: #0d1519;
+  }
+
+  .bg-site-light {
+    background-color: #131e24;
+  }
+
+  .bg-site-lighter {
+    background-color: #17242b;
   }
 
   .text-app {
@@ -39,6 +50,10 @@
 
   .bg-app {
     background-color: #ff9900;
+  }
+
+  .border-app {
+    border-color: #ff9900;
   }
 }
 
@@ -53,4 +68,28 @@
 
 .pixel {
   font-feature-settings: 'ss15';
+}
+
+.logo-text {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #ff9900 0%, #ffe078 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-text-bright {
+  background: linear-gradient(to right, #ff9900 0%, #ffe078 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.box-grad {
+  box-shadow: 0px 0px 4px 2px #b578ff;
+  border-radius: 0.075rem;
+}
+
+.box-grad:hover {
+  box-shadow: 0px 0px 6px 3px #8597ff;
+  border-radius: 0.125rem;
 }

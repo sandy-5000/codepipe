@@ -2,7 +2,7 @@
   <NuxtLayout :name="layout" title="Home">
     <div class="h-app-screen w-full a-center">
       <div
-        class="w-[200px] shadow-light hover:shadow-normal duration-300 rounded-xl a-center px-2 py-6"
+        class="w-[200px] hover:shadow-light duration-300 rounded-xl a-center px-2 py-6"
       >
         <div>
           <p class="text-center text-slate-100 font-normal text-sm pb-2">

@@ -7,7 +7,7 @@
     />
   </Head>
   <div class="font-sans min-h-screen antialiased bg-site">
-    <nav-bar></nav-bar>
+    <nav-bar class="m-container"></nav-bar>
     <div class="w-screen h-app-screen">
       <slot></slot>
     </div>
