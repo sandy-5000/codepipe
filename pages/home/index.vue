@@ -55,7 +55,7 @@
       </div>
       <div class="mt-16 w-full bg-app-grad p-1 h-[508px] relative a-center">
         <div class="z-[1]">
-          <NuxtLink :to="ROUTES.EDITOR">
+          <NuxtLink :to="session._id ? ROUTES.EDITOR : ROUTES.USER.REGISTER">
             <div
               class="group hover:scale-105 duration-300 ring-4 ring-[#0d1519] bg-slate-100 bg-opacity-40 rounded-2xl p-2"
             >
