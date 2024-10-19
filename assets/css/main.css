@@ -55,9 +55,79 @@ body {
   .bg-app {
     background-color: #ff9900;
   }
+  .bg-app-grad {
+    background: linear-gradient(to right, #ff9900aa 0%, #ffe078cc 100%);
+  }
 
   .border-app {
     border-color: #ff9900;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-20%);
+    }
+  }
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(-20%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  @keyframes scroll-oscillate {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-20%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .scroll-content-left-1 {
+    animation: scroll-left 14s linear infinite;
+  }
+  .scroll-content-left-2 {
+    animation: scroll-left 12s linear infinite;
+  }
+  .scroll-content-left-3 {
+    animation: scroll-left 10s linear infinite;
+  }
+  .scroll-content-left-4 {
+    animation: scroll-left 8s linear infinite;
+  }
+
+  .scroll-content-right-1 {
+    animation: scroll-right 14s linear infinite;
+  }
+  .scroll-content-right-2 {
+    animation: scroll-right 12s linear infinite;
+  }
+  .scroll-content-right-3 {
+    animation: scroll-right 10s linear infinite;
+  }
+  .scroll-content-right-4 {
+    animation: scroll-right 8s linear infinite;
+  }
+
+  .scroll-content-oscillate-1 {
+    animation: scroll-oscillate 14s linear infinite;
+  }
+  .scroll-content-oscillate-2 {
+    animation: scroll-oscillate 12s linear infinite;
+  }
+  .scroll-content-oscillate-3 {
+    animation: scroll-oscillate 10s linear infinite;
+  }
+  .scroll-content-oscillate-4 {
+    animation: scroll-oscillate 8s linear infinite;
   }
 }
 
@@ -89,11 +159,11 @@ body {
 }
 
 .box-grad {
-  box-shadow: 0px 0px 4px 2px #b578ff;
+  box-shadow: 0px 0px 4px 2px #ff9900;
   border-radius: 0.075rem;
 }
 
 .box-grad:hover {
-  box-shadow: 0px 0px 6px 3px #8597ff;
+  box-shadow: 0px 0px 6px 3px #ffbe78;
   border-radius: 0.125rem;
 }
