@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         },
       },
     ],
+    'nuxt-monaco-editor'
   ],
   runtimeConfig: {
     MONGODB: process.env.MONGODB,
