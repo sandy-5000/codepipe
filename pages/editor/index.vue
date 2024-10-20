@@ -85,7 +85,7 @@
 </template>
 
 <script setup>
-import { uniqid, validate } from '~/utils/helper'
+import { getUserId, validate } from '~/utils/helper'
 
 const { $socket } = useNuxtApp()
 
@@ -98,7 +98,6 @@ const { session } = await useSession()
 
 const socket = $socket
 
-const user_id = useState('user_id', () => '')
 const codeSync = useState('codeSync', () => false)
 const channelId = useState('channelId', () => '')
 const inputChannelId = useState('inputChannelId', () => '')
@@ -112,14 +111,14 @@ const loading = useState('loading', () => {
   }
 })
 
-socket.on('multicast', ({ sender_id, language, code }) => {
-  if (sender_id == user_id.value || !codeSync.value) {
+const handleMulticast = ({ sender_id, language, code }) => {
+  if (sender_id == getUserId() || !codeSync.value) {
     return
   }
   lang.value = language
   data.value = code
   previousCode.value = code
-})
+}
 
 const handleCodeUpdate = (code) => {
   if (previousCode.value == code) {
@@ -129,7 +128,7 @@ const handleCodeUpdate = (code) => {
   if (channel_id && codeSync.value) {
     socket.emit('code-change', {
       channel_id,
-      user_id: user_id.value,
+      user_id: getUserId(),
       language: lang.value,
       code,
     })
@@ -156,7 +155,7 @@ const createChannel = async () => {
     const response = await $fetch('/api/channel/create', {
       method: 'POST',
       body: {
-        _id: user_id.value,
+        _id: getUserId(),
       },
     })
     if (response.channel_id) {
@@ -165,7 +164,7 @@ const createChannel = async () => {
       }
       socket.emit('connect-channel', {
         channel_id: response.channel_id,
-        user_id: user_id.value,
+        user_id: getUserId(),
       })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
@@ -196,7 +195,7 @@ const joinChannel = async () => {
     const response = await $fetch('/api/channel/join', {
       method: 'POST',
       body: {
-        _id: user_id.value,
+        _id: getUserId(),
         channel_id: channel_id,
       },
     })
@@ -206,7 +205,7 @@ const joinChannel = async () => {
       }
       socket.emit('connect-channel', {
         channel_id: response.channel_id,
-        user_id: user_id.value,
+        user_id: getUserId(),
       })
       localStorage.setItem('channel_id', response.channel_id)
       channelId.value = response.channel_id
@@ -221,18 +220,9 @@ const joinChannel = async () => {
 
 const leaveChannel = () => {
   socket.emit('leave-channel', {
-    user_id: user_id.value,
+    user_id: getUserId(),
   })
   channelId.value = ''
-}
-
-const getUserId = () => {
-  let user_id = localStorage.getItem('user_id')
-  if (!validate(user_id)) {
-    user_id = uniqid()
-    localStorage.setItem('user_id', user_id)
-  }
-  return user_id
 }
 
 const runOnMount = () => {
@@ -240,13 +230,18 @@ const runOnMount = () => {
     create: false,
     join: false,
   }
-  user_id.value = getUserId()
   codeSync.value = false
   channelId.value = ''
   inputChannelId.value = ''
   message.value = ''
   previousCode.value = data.value
+  socket.on('multicast', handleMulticast)
+}
+
+const runBeforeUnmount = () => {
+  socket.off('multicast')
 }
 
 onMounted(runOnMount)
+onBeforeUnmount(runBeforeUnmount)
 </script>

@@ -10,7 +10,7 @@ import {
   faUserPlus,
   faPlus,
   faClone,
-  faAnglesRight,
+  faXmark,
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -21,9 +21,9 @@ library.add(
   faUserPlus,
   faPlus,
   faClone,
-  faAnglesRight,
   faComments,
-  faPaperPlane
+  faPaperPlane,
+  faXmark
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

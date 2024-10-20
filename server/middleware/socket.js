@@ -58,16 +58,16 @@ export default defineEventHandler((event) => {
         .emit('multicast', { sender_id: user_id, channel_id, language, code })
     })
 
-    socket.on('chat-connect', ({ user_id }) => {
+    socket.on('chat-message', (data) => {
+      io.emit('chat-broadcast', data)
+    })
+
+    socket.on('user-connect', ({ user_id }) => {
       const user = globalThis.clients.get(user_id)
       if (user && user.id != socket.id) {
         user.disconnect(true)
       }
       globalThis.clients.set(user_id, socket)
-    })
-
-    socket.on('chat-message', (data) => {
-      io.emit('chat-broadcast', data)
     })
 
     socket.on('disconnect', () => {

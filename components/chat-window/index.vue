@@ -37,14 +37,12 @@
     }"
   >
     <div class="p-3 flex justify-start h-[60px]">
-      <ui-button-primary @click="show = false">
-        <div class="v-center pr-1">
-          <font-awesome-icon icon="fa-solid fa-angles-right" />
-        </div>
-        <div class="v-center">
-          <span class="text-xs">Close</span>
-        </div>
-      </ui-button-primary>
+      <ui-button-secondary
+        class="a-center aspect-square px-0 py-0 ring-2 ring-orange-300 bg-slate-900 hover:bg-slate-900 hover:text-slate-100"
+        @click="show = false"
+      >
+        <font-awesome-icon class="text-lg" icon="fa-solid fa-xmark" />
+      </ui-button-secondary>
     </div>
     <div
       ref="messageContainer"
@@ -72,7 +70,7 @@
           >
             <button
               type="submit"
-              class="outline-none bg-gray-900 text-gray-100 border-2 border-gray-700 hover:border-indigo-600 focus:border-indigo-600 rounded-lg h-full px-3"
+              class="outline-none bg-gray-900 text-gray-100 border-2 border-gray-700 hover:border-orange-400 focus:border-orange-400 rounded-lg h-full px-3"
             >
               <font-awesome-icon icon="fa-solid fa-paper-plane" />
             </button>
@@ -84,7 +82,7 @@
 </template>
 
 <script setup>
-import { uniqid, validate } from '~/utils/helper'
+import { getUserId } from '~/utils/helper'
 
 const { $socket } = useNuxtApp()
 
@@ -112,36 +110,33 @@ const addMessage = ({ uid, content }) => {
     messages.value.shift()
   }
   messages.value.push({ id: uid, content })
-  if (id.value === uid) {
+  if (uid === getUserId()) {
     scrollToBottom()
   }
 }
 
-socket.on('chat-broadcast', (data) => {
-  addMessage(data)
-})
-
 const handleChatSubmit = () => {
+  if (messageBox.value === '') {
+    return
+  }
   socket.emit('chat-message', {
-    uid: id.value,
+    uid: getUserId(),
     content: messageBox.value,
   })
   messageBox.value = ''
 }
 
-const getUserId = () => {
-  let user_id = localStorage.getItem('user_id')
-  if (!validate(user_id)) {
-    user_id = uniqid()
-    localStorage.setItem('user_id', user_id)
-  }
-  return user_id
-}
-
 const runOnMount = () => {
   id.value = getUserId()
-  socket.emit('chat-connect', { user_id: id.value })
+  socket.on('chat-broadcast', (data) => {
+    addMessage(data)
+  })
+}
+
+const runBoforeUnmount = () => {
+  socket.off('chat-broadcast')
 }
 
 onMounted(runOnMount)
+onBeforeUnmount(runBoforeUnmount)
 </script>

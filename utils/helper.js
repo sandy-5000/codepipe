@@ -25,8 +25,17 @@ const validate = (x) => {
   return pattern.test(x)
 }
 
+const getUserId = () => {
+  let user_id = localStorage.getItem('user_id')
+  if (!validate(user_id)) {
+    user_id = uniqid()
+    localStorage.setItem('user_id', user_id)
+  }
+  return user_id
+}
+
 const templates = {
   javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to CodeCargo.\`)\n`,
 }
 
-export { __, ROUTES, templates, uniqid, validate }
+export { __, ROUTES, templates, uniqid, validate, getUserId }
