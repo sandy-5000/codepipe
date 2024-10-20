@@ -129,7 +129,7 @@
       </div>
       <div class="bg-site h-[600px] w-full px-2 md:px-5 lg:px-10">
         <div class="h-full rounded-lg">
-          <code-editor></code-editor>
+          <code-editor :run="true"></code-editor>
         </div>
       </div>
       <div class="editor-button flex justify-end my-3 px-3 mt-5">

@@ -14,4 +14,8 @@ const ROUTES = {
   DEVELOPER: '/_____',
 }
 
-export { __, ROUTES }
+const templates = {
+  javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to CodeCargo.\`)\n`,
+}
+
+export { __, ROUTES, templates }
