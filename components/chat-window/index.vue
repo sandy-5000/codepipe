@@ -9,7 +9,7 @@
 }
 
 .mid-window-size {
-  height: calc(100vh - 130px);
+  height: calc(100vh - 170px);
 }
 </style>
 
@@ -36,26 +36,39 @@
       'show-chat': show,
     }"
   >
-    <div class="p-3 flex justify-start h-[60px]">
-      <ui-button-secondary
-        class="a-center aspect-square px-0 py-0 ring-2 ring-orange-300 bg-slate-900 hover:bg-slate-900 hover:text-slate-100"
+    <div class="p-3 flex justify-between h-[60px]">
+      <button
+        class="a-center rounded-md aspect-square px-0 ring-2 ring-orange-300 bg-slate-900 text-slate-100 hover:bg-slate-900 hover:text-slate-100"
         @click="show = false"
       >
         <font-awesome-icon class="text-lg" icon="fa-solid fa-xmark" />
-      </ui-button-secondary>
+      </button>
+      <ui-button-primary @click="messages = []">clear</ui-button-primary>
     </div>
-    <div
-      ref="messageContainer"
-      class="mid-window-size p-5 relative overflow-y-scroll"
-    >
-      <chat-window-message mtype="CodeCargo"
-        >Hello guys, this is CodeCargo!</chat-window-message
+    <div class="p-5">
+      <div
+        ref="messageContainer"
+        class="mid-window-size rounded-md ring-2 ring-slate-700 p-5 relative overflow-y-scroll bg-site-lighter"
       >
-      <chat-window-message
-        v-for="msg of messages"
-        :mtype="msg.id === id ? 'sender' : 'receive'"
-        >{{ msg.content }}</chat-window-message
-      >
+        <button
+          :class="{
+            'fixed z-[10] w-8 right-[20px] bottom-[80px] a-center rounded-full aspect-square ring-2 hover:ring-4 ring-orange-300 bg-slate-900 text-slate-100 hover:bg-slate-900 hover:text-slate-100': true,
+            'hide-chat': true,
+            'show-chat': show,
+          }"
+          @click="scrollToBottom"
+        >
+          <font-awesome-icon class="text-lg" icon="fa-solid fa-arrow-down" />
+        </button>
+        <chat-window-message mtype="CodeCargo"
+          >Hello guys, this is CodeCargo!</chat-window-message
+        >
+        <chat-window-message
+          v-for="msg of messages"
+          :mtype="msg.id === id ? 'sender' : 'receive'"
+          >{{ msg.content }}</chat-window-message
+        >
+      </div>
     </div>
     <div class="h-[70px]">
       <form @submit.prevent="handleChatSubmit">
