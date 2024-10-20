@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout :name="layout" :title="title">
+    <chat-window></chat-window>
     <message-alert :message="message" @close="(x) => (message = x)" />
     <div class="bg-site py-5 h-[600px] w-full px-2 md:px-5 lg:px-10">
       <div class="h-full rounded-lg">
@@ -79,12 +80,14 @@
         </Button>
       </div>
     </div>
+    <div v-else class="h-20"></div>
   </NuxtLayout>
 </template>
 
 <script setup>
 import { uniqid, validate } from '~/utils/helper'
-import io from 'socket.io-client'
+
+const { $socket } = useNuxtApp()
 
 const layout = 'main-layout'
 const title = 'Editor'
@@ -93,9 +96,7 @@ const lang = ref('')
 
 const { session } = await useSession()
 
-const socket = io({
-  path: '/api/socket.io/',
-})
+const socket = $socket
 
 const user_id = useState('user_id', () => '')
 const codeSync = useState('codeSync', () => false)

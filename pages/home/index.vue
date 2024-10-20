@@ -11,6 +11,7 @@
 
 <template>
   <NuxtLayout :name="layout" :title="title">
+    <chat-window></chat-window>
     <div class="w-full overflow-x-hidden">
       <div class="h-center">
         <div class="mt-16">
