@@ -102,6 +102,7 @@ const codeSync = useState('codeSync', () => false)
 const channelId = useState('channelId', () => '')
 const inputChannelId = useState('inputChannelId', () => '')
 const message = useState('message', () => '')
+const previousCode = useState('previousCode', () => '')
 
 const loading = useState('loading', () => {
   return {
@@ -116,9 +117,13 @@ socket.on('multicast', ({ sender_id, language, code }) => {
   }
   lang.value = language
   data.value = code
+  previousCode.value = code
 })
 
 const handleCodeUpdate = (code) => {
+  if (previousCode.value == code) {
+    return
+  }
   const channel_id = localStorage.getItem('channel_id')
   if (channel_id && codeSync.value) {
     socket.emit('code-change', {
@@ -239,6 +244,7 @@ const runOnMount = () => {
   channelId.value = ''
   inputChannelId.value = ''
   message.value = ''
+  previousCode.value = data.value
 }
 
 onMounted(runOnMount)
