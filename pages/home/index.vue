@@ -129,10 +129,12 @@
       </div>
       <div class="bg-site h-[600px] w-full px-2 md:px-5 lg:px-10">
         <div class="h-full rounded-lg">
-          <code-editor :run="true"></code-editor>
+          <code-editor run></code-editor>
         </div>
       </div>
-      <div class="editor-button flex justify-end my-3 px-3 mt-5">
+      <div
+        class="editor-button flex justify-end my-3 px-3 md:px-3 lg:px-12 mt-5"
+      >
         <span class="relative inline-flex">
           <NuxtLink :to="ROUTES.EDITOR" class="box-grad">
             <button

@@ -14,8 +14,19 @@ const ROUTES = {
   DEVELOPER: '/_____',
 }
 
+const uniqid = () => {
+  const timeStamp = Date.now().toString(36)
+  const random = Math.random().toString(36).substring(2, 6)
+  return [timeStamp.slice(0, 4), timeStamp.slice(4, 8), random].join('-')
+}
+
+const validate = (x) => {
+  const pattern = /^[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}$/
+  return pattern.test(x)
+}
+
 const templates = {
   javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to CodeCargo.\`)\n`,
 }
 
-export { __, ROUTES, templates }
+export { __, ROUTES, templates, uniqid, validate }

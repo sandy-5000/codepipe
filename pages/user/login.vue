@@ -34,7 +34,7 @@
 
       <!-- Remember Me -->
       <div class="mt-4 flex justify-between">
-        <ui-switch id="remember_me" prompt="Remember me"></ui-switch>
+        <ui-switch id="remember_me" prompt="Remember me" checked></ui-switch>
         <NuxtLink
           :to="ROUTES.AUTH.FORGET_PASSWORD"
           class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 focus:ring-offset-gray-800"
