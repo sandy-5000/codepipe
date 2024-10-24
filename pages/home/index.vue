@@ -22,7 +22,7 @@
             <h1
               class="text-center logo-text-bright uppercase font-semibold text-md mx-20"
             >
-              CodeCargo
+              {{ getSiteName() }}
             </h1>
           </div>
         </div>
@@ -40,12 +40,12 @@
           <p class="text-center text-sm font-normal pt-2">
             Welcome to
             <span class="logo-text-bright text-md font-semibold">
-              CodeCargo </span
+              {{ getSiteName() }} </span
             >🥱, for a good javascript coding experiences.
           </p>
           <p class="text-center text-sm font-normal pt-2">
             <span class="logo-text-bright text-md font-semibold">
-              CodeCargo
+              {{ getSiteName() }}
             </span>
             is a collaborative platform for seamless real-time code syncing
             within channels. 😪... Instantly share and update code across users,

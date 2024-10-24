@@ -37,7 +37,7 @@
         <ui-switch id="remember_me" prompt="Remember me" checked></ui-switch>
         <NuxtLink
           :to="ROUTES.AUTH.FORGET_PASSWORD"
-          class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"
+          class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-app"
         >
           {{ __('Forgot your password?') }}
         </NuxtLink>
@@ -47,7 +47,7 @@
         <NuxtLink
           :to="ROUTES.USER.REGISTER"
           style="margin-right: auto"
-          class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"
+          class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-app"
         >
           {{ __('Not registered?') }}
         </NuxtLink>

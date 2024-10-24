@@ -60,9 +60,9 @@
         >
           <font-awesome-icon class="text-lg" icon="fa-solid fa-arrow-down" />
         </button>
-        <chat-window-message mtype="CodeCargo"
-          >Hello guys, this is CodeCargo!</chat-window-message
-        >
+        <chat-window-message :mtype="getSiteName()"
+          >Hello guys, this is {{ getSiteName() }}
+        </chat-window-message>
         <chat-window-message
           v-for="msg of messages"
           :mtype="msg.id === id ? 'sender' : 'receive'"

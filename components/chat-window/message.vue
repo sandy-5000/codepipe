@@ -25,11 +25,16 @@
 </template>
 
 <script setup>
+import { getSiteName } from '~/utils/helper'
+
 const props = defineProps({
   mtype: String,
 })
+
+const company = getSiteName()
+
 const userType = {
-  CodeCargo: 'CodeCargo',
+  [company]: company,
   receive: 'Anonymous',
   sender: 'You',
 }

@@ -13,7 +13,9 @@
           <NuxtLink :to="ROUTES.HOME" class="flex justify-start px-3">
             <ui-logo-glow class-name="w-[80px] mr-5"></ui-logo-glow>
             <div class="a-center">
-              <h1 class="text-xl block font-normal logo-text">CODECARGO</h1>
+              <h1 class="text-xl block font-normal logo-text">
+                {{ getSiteName() }}
+              </h1>
             </div>
           </NuxtLink>
         </div>

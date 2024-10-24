@@ -34,8 +34,10 @@ const getUserId = () => {
   return user_id
 }
 
+const getSiteName = () => 'CodeCargo'
+
 const templates = {
-  javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to CodeCargo.\`)\n`,
+  javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to ${getSiteName()}.\`)\n`,
 }
 
-export { __, ROUTES, templates, uniqid, validate, getUserId }
+export { __, ROUTES, templates, uniqid, validate, getUserId, getSiteName }

@@ -1,9 +1,13 @@
 <template>
   <Head>
-    <Title>CodeCargo | {{ title || 'Home' }}</Title>
+    <Title>{{ getSiteName() }} | {{ title || 'Home' }}</Title>
     <Meta
       name="description"
-      content="Welcome to CODECARGO - Your Ultimate Coding Hub!"
+      :content="
+        __(
+          `Welcome to ${getSiteName()?.toUpperCase()} - Your Ultimate Coding Hub!`
+        )
+      "
     />
   </Head>
   <div class="font-sans min-h-screen antialiased bg-site">
