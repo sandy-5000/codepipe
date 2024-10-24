@@ -1,5 +1,5 @@
 <template>
-  <label class="block font-normal text-sm text-gray-300">
+  <label class="block font-normal text-sm text-label">
     {{ value }}
   </label>
 </template>

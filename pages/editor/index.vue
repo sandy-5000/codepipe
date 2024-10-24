@@ -24,10 +24,10 @@
             >
               <div
                 @click="copyChannel(channelId)"
-                class="h-full bg-gray-800 cursor-pointer border-2 border-orange-400 rounded-md a-center p-1"
+                class="h-full bg-button cursor-pointer border-2 border-app rounded-md a-center p-1"
               >
                 <font-awesome-icon
-                  class="text-sm text-slate-100"
+                  class="text-sm text-site-content"
                   icon="fa-solid fa-clone"
                 />
               </div>
@@ -39,7 +39,7 @@
               :disabled="!!channelId"
             />
           </div>
-          <div class="mt-1 flex justify-end md:justify-start">
+          <div class="mt-1 flex justify-start">
             <ui-button-primary
               @click="joinChannel()"
               v-if="!loading.join && !channelId"
@@ -69,7 +69,7 @@
         <Button
           @click="createChannel()"
           :disabled="loading.create || !!channelId"
-          class="border-2 disabled:opacity-50 disabled:cursor-not-allowed border-orange-400 rounded-lg z-[1] py-4 px-10 bg-site-lighter text-slate-100 a-center"
+          class="border-2 disabled:opacity-50 disabled:cursor-not-allowed border-app rounded-lg z-[1] py-4 px-10 bg-site-lighter text-site-content a-center"
         >
           <font-awesome-icon
             fill="#f1f5f9"

@@ -8,7 +8,7 @@
       :required="required || false"
       :id="id"
       :class="{
-        'text-input w-full placeholder-gray-500 placeholder:text-sm border-gray-700 bg-site border-2 outline-none text-gray-300 h-10 px-3 focus:border-orange-300 focus:ring-orange-300 rounded-md shadow-sm': true,
+        'text-input w-full placeholder-app placeholder:text-sm border-over-site bg-site border-2 outline-none text-label h-10 px-3 focus:border-app-light focus:ring-app-light rounded-md shadow-sm': true,
         'pr-8': type === __('password'),
         [className]: true,
       }"
@@ -22,13 +22,13 @@
       <font-awesome-icon
         v-if="showPasswd"
         @click="showPasswd = false"
-        class="text-slate-100 cursor-pointer text-sm"
+        class="text-site-content cursor-pointer text-sm"
         icon="far fa-eye"
       />
       <font-awesome-icon
         v-if="!showPasswd"
         @click="showPasswd = true"
-        class="text-slate-100 cursor-pointer text-sm"
+        class="text-site-content cursor-pointer text-sm"
         icon="far fa-eye-slash"
       />
     </div>

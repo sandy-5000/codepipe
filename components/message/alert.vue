@@ -14,26 +14,26 @@
 <template>
   <div
     :class="{
-      'hide-message left-5 bottom-8 m-2 z-10 border-2 rounded border-orange-400 border-y-0 fixed bg-gray-950': true,
+      'hide-message left-5 bottom-8 m-2 z-10 border-2 rounded border-app border-y-0 fixed bg-site': true,
       'show-message': alert != '',
     }"
   >
     <div class="flex justify-start">
       <div
-        class="h-0 rounded-t border-t-2 border-orange-400"
+        class="h-0 rounded-t border-t-2 border-app"
         :style="{
           width: width + '%',
         }"
       ></div>
     </div>
     <div class="px-5 py-3">
-      <div class="text-sm text-gray-100">
+      <div class="text-sm text-site-content">
         {{ message }}
       </div>
     </div>
     <div class="flex justify-end">
       <div
-        class="h-0 rounded-b border-b-2 border-orange-400"
+        class="h-0 rounded-b border-b-2 border-app"
         :style="{
           width: width + '%',
         }"

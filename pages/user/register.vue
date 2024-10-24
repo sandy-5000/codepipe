@@ -88,7 +88,7 @@
       <div class="flex items-center justify-between mt-4">
         <NuxtLink
           :to="ROUTES.USER.LOGIN"
-          class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400 focus:ring-offset-gray-800"
+          class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-app"
         >
           {{ __('Already registered?') }}
         </NuxtLink>

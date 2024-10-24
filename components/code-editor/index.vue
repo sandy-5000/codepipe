@@ -8,7 +8,7 @@
         v-model="code"
       >
         <div class="h-full w-full a-center">
-          <p class="text-slate-100 text-xs uppercase">Editor loading</p>
+          <p class="text-site-content text-xs uppercase">Editor loading</p>
         </div>
       </MonacoEditor>
     </div>
@@ -19,28 +19,28 @@
         >
           <ui-button-secondary
             v-if="!loading"
-            class="ring-2 ring-slate-100"
+            class="ring-2 ring-site-content"
             @click="handleClear"
             >Clear</ui-button-secondary
           >
           <ui-button-loading
             v-if="loading"
-            class="ring-2 ring-slate-100 rounded-md"
+            class="ring-2 ring-site-content rounded-md"
             >Running...</ui-button-loading
           >
           <ui-button-danger
             v-else
-            class="ring-2 bg-red-500 ring-red-500 text-slate-100"
+            class="ring-2 bg-red-500 ring-red-500 text-site-content"
             @click="handleRunWithDelay(500)"
             >Run</ui-button-danger
           >
         </div>
         <div class="v-center h-[30px]">
-          <p class="text-xs uppercase text-slate-100">Output:</p>
+          <p class="text-xs uppercase text-site-content">Output:</p>
         </div>
       </div>
       <div class="w-full bg-site rounded-md h-[440px] overflow-scroll">
-        <pre class="text-slate-100 p-2 text-xs">{{
+        <pre class="text-site-content p-2 text-xs">{{
           loading ? __('Executing...') : output
         }}</pre>
       </div>

@@ -2,7 +2,7 @@
   <NuxtLayout :name="layout" title="Profile">
     <header class="bg-site-light">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <p class="text-slate-100 font-normal text-md px-2">Profile</p>
+        <p class="text-site-content font-normal text-md px-2">Profile</p>
       </div>
     </header>
     <div class="py-12 mx-2 md:mx-0">
@@ -11,10 +11,10 @@
           <div class="max-w-xl">
             <section>
               <header>
-                <h2 class="text-lg font-medium text-gray-100">
+                <h2 class="text-lg font-medium text-site-content">
                   {{ __('Profile Information') }}
                 </h2>
-                <p class="mt-1 text-sm text-gray-400">
+                <p class="mt-1 text-sm text-label-dark">
                   {{
                     __(
                       "Update your account's profile information and email address."
@@ -57,12 +57,12 @@
                   <ui-input-error class="mt-2" :messages="null" />
 
                   <div v-if="true">
-                    <p class="text-sm mt-2 text-gray-200">
+                    <p class="text-sm mt-2 text-site-content">
                       {{ __('Your email address is unverified.') }}
 
                       <button
                         form="send-verification"
-                        class="underline text-sm text-gray-400 hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-gray-800"
+                        class="underline text-sm text-label-dark hover:text-site-content rounded-md focus:outline-none focus:ring-2 focus:ring-app"
                       >
                         {{
                           __('Click here to re-send the verification email.')
@@ -89,7 +89,7 @@
                   <ui-button-loading v-if="loading.profileUpdate"
                     >Updating...</ui-button-loading
                   >
-                  <p v-if="show.profileUpdated" class="text-sm text-gray-400">
+                  <p v-if="show.profileUpdated" class="text-sm text-label-dark">
                     {{ show.profileUpdated }}
                   </p>
                 </div>
@@ -102,11 +102,11 @@
           <div class="max-w-xl">
             <section>
               <header>
-                <h2 class="text-lg font-medium text-gray-100">
+                <h2 class="text-lg font-medium text-site-content">
                   {{ __('Update Password') }}
                 </h2>
 
-                <p class="mt-1 text-sm text-gray-400">
+                <p class="mt-1 text-sm text-label-dark">
                   {{
                     __(
                       'Ensure your account is using a long, random password to stay secure.'
@@ -176,7 +176,10 @@
                   <ui-button-loading v-if="loading.passwordUpdate"
                     >Updating...</ui-button-loading
                   >
-                  <p v-if="show.passwordUpdated" class="text-sm text-gray-400">
+                  <p
+                    v-if="show.passwordUpdated"
+                    class="text-sm text-label-dark"
+                  >
                     {{ show.passwordUpdated }}
                   </p>
                 </div>
@@ -189,10 +192,10 @@
           <div class="max-w-xl">
             <section class="space-y-6">
               <header>
-                <h2 class="text-lg font-medium text-gray-100">
+                <h2 class="text-lg font-medium text-site-content">
                   {{ __('Delete Account') }}
                 </h2>
-                <p class="mt-1 text-sm text-gray-400">
+                <p class="mt-1 text-sm text-label-dark">
                   Once your account is deleted, all of its resources and data
                   will be permanently deleted. Before deleting your account,
                   please download any data or information that you wish to

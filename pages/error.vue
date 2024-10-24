@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout :name="layout" :title="title">
     <div class="w-full h-full py-4">
-      <p class="text-gray-200 text-md font-semibold uppercase text-center">
+      <p class="text-site-content text-md font-semibold uppercase text-center">
         Something went Wrong
       </p>
       <div class="a-center mt-4">

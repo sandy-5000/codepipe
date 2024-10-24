@@ -15,15 +15,15 @@
 
 <template>
   <div
-    class="fixed right-4 bottom-4 z-[19] w-14 aspect-square rounded-full hover:cursor-pointer ring-4 ring-[#0d1519] bg-slate-100 bg-opacity-40 a-center"
+    class="fixed right-4 bottom-4 z-[19] w-14 aspect-square rounded-full hover:cursor-pointer ring-4 ring-site bg-slate-100 bg-opacity-40 a-center"
   >
     <Button
       @click="show = true"
-      class="ring-4 ring-orange-300 rounded-full w-10 aspect-square bg-orange-300 text-slate-100 a-center"
+      class="ring-4 ring-app-light rounded-full w-10 aspect-square bg-app-light a-center"
     >
       <div class="a-center">
         <font-awesome-icon
-          class="text-slate-900 text-xl"
+          class="text-site text-xl"
           icon="fa-regular fa-comments"
         />
       </div>
@@ -31,14 +31,14 @@
   </div>
   <div
     :class="{
-      'fixed border-l-4 border-orange-400 z-20 top-0 right-0 h-screen bg-site w-[300px] md:w-[400px]': true,
+      'fixed border-l-4 border-app z-20 top-0 right-0 h-screen bg-site w-[300px] md:w-[400px]': true,
       'hide-chat': true,
       'show-chat': show,
     }"
   >
     <div class="p-3 flex justify-between h-[60px]">
       <button
-        class="a-center rounded-md aspect-square px-0 ring-2 ring-orange-300 bg-slate-900 text-slate-100 hover:bg-slate-900 hover:text-slate-100"
+        class="a-center rounded-md aspect-square px-0 ring-2 ring-app-light text-site-content"
         @click="show = false"
       >
         <font-awesome-icon class="text-lg" icon="fa-solid fa-xmark" />
@@ -48,11 +48,11 @@
     <div class="p-5">
       <div
         ref="messageContainer"
-        class="mid-window-size rounded-md ring-2 ring-slate-700 p-5 relative overflow-y-scroll bg-site-lighter"
+        class="mid-window-size rounded-md ring-2 ring-over-site p-5 relative overflow-y-scroll bg-site-lighter"
       >
         <button
           :class="{
-            'fixed z-[10] w-8 right-[20px] bottom-[80px] a-center rounded-full aspect-square ring-2 hover:ring-4 ring-orange-300 bg-slate-900 text-slate-100 hover:bg-slate-900 hover:text-slate-100': true,
+            'fixed z-[10] w-8 right-[20px] bottom-[80px] a-center rounded-full aspect-square ring-2 hover:ring-4 ring-app bg-site text-site-content hover:text-site-content': true,
             'hide-chat': true,
             'show-chat': show,
           }"
@@ -76,14 +76,14 @@
           <input
             v-model="messageBox"
             placeholder="Message"
-            class="text-sm outline-none border-2 border-gray-700 focus:border-orange-400 px-3 pr-[100px] rounded-lg w-full h-full text-gray-100 bg-site-light"
+            class="text-sm outline-none border-2 border-over-site focus:border-app-light px-3 pr-[100px] rounded-lg w-full h-full text-site-content bg-site-light"
           />
           <div
             class="absolute h-full top-0 right-0 py-3 pr-4 flex flex-col justify-center"
           >
             <button
               type="submit"
-              class="outline-none bg-gray-900 text-gray-100 border-2 border-gray-700 hover:border-orange-400 focus:border-orange-400 rounded-lg h-full px-3"
+              class="outline-none bg-site text-site-content border-2 border-over-site hover:border-app focus:border-app rounded-lg h-full px-3"
             >
               <font-awesome-icon icon="fa-solid fa-paper-plane" />
             </button>

@@ -5,12 +5,12 @@
         class="w-[200px] hover:shadow-light duration-300 rounded-xl a-center px-2 py-6"
       >
         <div>
-          <p class="text-center text-slate-100 font-normal text-sm pb-2">
+          <p class="text-center text-site-content font-normal text-sm pb-2">
             Developer
           </p>
           <div
             v-for="developer of developers"
-            class="border-b-2 px-1 border-gray-100 pb-1 a-center mt-2"
+            class="border-b-2 px-1 border-site pb-1 a-center mt-2"
           >
             <a
               target="_blank"
@@ -37,7 +37,7 @@
                 </svg>
               </div>
               <div class="a-center w-[86px]">
-                <span class="w-full text-sm text-slate-100 text-center">{{
+                <span class="w-full text-sm text-site-content text-center">{{
                   developer.name
                 }}</span>
               </div>

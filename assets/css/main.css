@@ -16,20 +16,15 @@ body {
 
 @layer utilities {
   .a-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @apply flex justify-center items-center;
   }
 
   .h-center {
-    display: flex;
-    justify-content: center;
+    @apply flex justify-center;
   }
 
   .v-center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @apply flex flex-col justify-center;
   }
 
   .m-container {
@@ -37,30 +32,93 @@ body {
   }
 
   .bg-site {
-    background-color: #0d1519;
+    @apply bg-[#0d1519];
   }
-
   .bg-site-light {
-    background-color: #131e24;
+    @apply bg-[#131e24];
+  }
+  .bg-site-lighter {
+    @apply bg-[#17242b];
+  }
+  .bg-site-content {
+    @apply bg-slate-100;
   }
 
-  .bg-site-lighter {
-    background-color: #17242b;
+  .text-site {
+    @apply text-[#0d1519];
+  }
+
+  .text-site-content {
+    @apply text-slate-100;
+  }
+
+  .placeholder-app {
+    @apply placeholder-gray-500;
   }
 
   .text-app {
     color: #ff9900;
   }
+  .text-app-light {
+    @apply text-orange-300;
+  }
+
+  .text-button {
+    @apply text-gray-800;
+  }
+  .bg-button {
+    @apply bg-gray-800;
+  }
+  .bg-button-reverse {
+    @apply bg-gray-200;
+  }
+  .border-button {
+    @apply border-gray-800;
+  }
+
+  .text-label {
+    @apply text-gray-300;
+  }
+  .text-label-dark {
+    @apply text-gray-400;
+  }
 
   .bg-app {
     background-color: #ff9900;
+  }
+  .bg-app-light {
+    @apply bg-orange-300;
   }
   .bg-app-grad {
     background: linear-gradient(to right, #ff9900aa 0%, #ffe078cc 100%);
   }
 
   .border-app {
-    border-color: #ff9900;
+    @apply border-[#ff9900];
+  }
+  .border-app-light {
+    @apply border-orange-300;
+  }
+
+  .ring-app {
+    @apply ring-[#ff9900];
+  }
+  .ring-app-light {
+    @apply ring-orange-300;
+  }
+
+  .ring-site {
+    @apply ring-[#0d1519];
+  }
+  .ring-site-content {
+    @apply ring-slate-100;
+  }
+
+  .border-over-site {
+    @apply border-gray-700;
+  }
+  .ring-over-site {
+    @apply ring-gray-700;
   }
 
   @keyframes scroll-left {

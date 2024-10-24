@@ -8,16 +8,16 @@
   >
     <div
       :class="{
-        'w-10/12 bg-gray-950 rounded-lg border-2 p-3 my-1 border-orange-300': true,
+        'w-10/12 bg-site rounded-lg border-2 p-3 my-1 border-app-light': true,
         'rounded-bl-md': mtype === 'receive',
         'rounded-br-md': mtype === 'sender',
       }"
     >
       <div class="flex space-x-2">
         <icons-person></icons-person>
-        <span class="text-gray-400 text-xs">{{ user }}</span>
+        <span class="text-label-dark text-xs">{{ user }}</span>
       </div>
-      <p class="text-gray-100 mt-2 text-sm px-2">
+      <p class="text-site-content mt-2 text-sm px-2">
         <slot />
       </p>
     </div>

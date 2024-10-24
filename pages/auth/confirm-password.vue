@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout :name="layout" title="Confirm Password">
-    <div class="mb-4 text-sm text-gray-400">
+    <div class="mb-4 text-sm text-label-dark">
       <p>
         This is a secure area of the application. Please confirm your password
         before continuing.

@@ -57,7 +57,7 @@
       <div class="background"></div>
       <div class="circle"></div>
     </label>
-    <span class="ms-2 text-sm text-gray-400">{{ prompt }}</span>
+    <span class="ms-2 text-sm text-label-dark">{{ prompt }}</span>
   </label>
 </template>
 

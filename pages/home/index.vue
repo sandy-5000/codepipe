@@ -29,7 +29,7 @@
       </div>
       <div class="h-center">
         <div
-          class="mt-12 mx-5 md:mx-16 lg:mx-32 xl:mx-40 2xl:mx-68 bg-site-light text-slate-100 shadow px-5 md:px-10 lg:px-16 xl:px-24 py-14 rounded-lg"
+          class="mt-12 mx-5 md:mx-16 lg:mx-32 xl:mx-40 2xl:mx-68 bg-site-light text-site-content shadow px-5 md:px-10 lg:px-16 xl:px-24 py-14 rounded-lg"
         >
           <h5 class="text-center font-normal text-lg pb-3">
             Hello,
@@ -58,10 +58,10 @@
         <div class="z-[1]">
           <NuxtLink :to="session._id ? ROUTES.EDITOR : ROUTES.USER.REGISTER">
             <div
-              class="group hover:scale-105 duration-300 ring-4 ring-[#0d1519] bg-slate-100 bg-opacity-40 rounded-2xl p-2"
+              class="group hover:scale-105 duration-300 ring-4 ring-site bg-slate-100 bg-opacity-40 rounded-2xl p-2"
             >
               <Button
-                class="ring-4 ring-orange-300 rounded-lg z-[1] py-4 px-12 bg-site-light text-slate-100 a-center"
+                class="ring-4 ring-app-light rounded-lg z-[1] py-4 px-12 bg-site-light text-site-content a-center"
               >
                 <div class="a-center group-hover:scale-[0.96] duration-300">
                   <font-awesome-icon
@@ -122,7 +122,7 @@
       <div class="a-center">
         <div class="pb-4">
           <p
-            class="text-center px-2 pb-1 capitalize border-b-2 border-orange-300 font-normal text-sm text-slate-100"
+            class="text-center px-2 pb-1 capitalize border-b-2 border-app-light font-normal text-sm text-site-content"
           >
             To view in full screen go to Editor
           </p>
@@ -140,7 +140,7 @@
           <NuxtLink :to="ROUTES.EDITOR" class="box-grad">
             <button
               type="button"
-              class="duration-300 inline-flex items-center px-4 py-2 font-semibold leading-6 shadow rounded-sm text-white bg-gray-800 transition ease-in-out cursor-pointer"
+              class="duration-300 inline-flex items-center px-4 py-2 font-semibold leading-6 shadow rounded-sm text-site-content bg-button transition ease-in-out cursor-pointer"
             >
               <font-awesome-icon
                 fill="#f1f5f9"
@@ -152,10 +152,10 @@
           </NuxtLink>
           <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
             <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-300 opacity-75"
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-app-light opacity-75"
             ></span>
             <span
-              class="relative inline-flex rounded-full h-3 w-3 bg-gray-700 opacity-90"
+              class="relative inline-flex rounded-full h-3 w-3 bg-site-lighter opacity-90"
             ></span>
           </span>
         </span>
@@ -168,7 +168,7 @@
           <div class="a-center mt-10">
             <NuxtLink class="box-grad animate-pulse" :to="ROUTES.EDITOR">
               <Button
-                class="duration-300 rounded-lg z-[1] py-4 px-12 bg-site-light text-slate-100 a-center"
+                class="duration-300 rounded-lg z-[1] py-4 px-12 bg-site-light text-site-content a-center"
               >
                 <font-awesome-icon
                   fill="#f1f5f9"
