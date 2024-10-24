@@ -4,7 +4,7 @@
       <MonacoEditor
         class="h-full"
         :options="options"
-        :lang="lang || __('javascript')"
+        :lang="lang"
         v-model="code"
       >
         <div class="h-full w-full a-center">
@@ -13,9 +13,9 @@
       </MonacoEditor>
     </div>
     <div class="h-full w-1/3 p-1">
-      <div class="h-[90px]">
+      <div class="h-[130px]">
         <div
-          class="h-[60px] flex justify-end items-center gap-2 pr-2 overflow-x-scroll"
+          class="h-[60px] flex gap-2 justify-end items-center pr-2 overflow-x-scroll"
         >
           <ui-button-secondary
             v-if="!loading"
@@ -35,11 +35,20 @@
             >Run</ui-button-danger
           >
         </div>
+        <div class="h-[40px] flex justify-between">
+          <ui-select
+            v-model:value="lang"
+            :options="languageOptions"
+            @update:option="(x) => (lang = x)"
+            class="h-full"
+          />
+          <ui-button-secondary>Save</ui-button-secondary>
+        </div>
         <div class="v-center h-[30px]">
           <p class="text-xs uppercase text-site-content">Output:</p>
         </div>
       </div>
-      <div class="w-full bg-site rounded-md h-[440px] overflow-scroll">
+      <div class="w-full bg-site rounded-md h-[400px] overflow-scroll">
         <pre class="text-site-content p-2 text-xs">{{
           loading ? __('Executing...') : output
         }}</pre>
@@ -58,6 +67,12 @@ const props = defineProps({
 })
 
 const code = defineModel('data', '')
+const lang = defineModel('language', { default: 'javascript' })
+
+const languageOptions = [
+  { label: 'Javascript', value: 'javascript' },
+  { label: 'Python', value: 'python' },
+]
 
 const output = ref('')
 const loading = ref(false)
@@ -70,10 +85,16 @@ const options = {
 const emit = defineEmits(['update:code', 'press:run'])
 watch(code, (value) => {
   if (props.store) {
-    const lang = props.lang || __('javascript')
-    localStorage.setItem(lang, value)
+    localStorage.setItem(lang.value, value)
   }
   emit('update:code', value)
+})
+watch(lang, (value) => {
+  let savedCode = ''
+  if (props.store) {
+    savedCode = localStorage.getItem(value) || ''
+  }
+  code.value = savedCode
 })
 
 const handleClear = () => {
@@ -83,7 +104,7 @@ const handleClear = () => {
 const handleRunWithDelay = (delay) => {
   loading.value = true
   setTimeout(() => {
-    execute[props.lang || __('javascript')]()
+    execute[lang.value]()
   }, delay)
 }
 
@@ -122,6 +143,11 @@ const execute = {
     }
     emit('press:run', output.value)
   },
+  python: () => {
+    output.value = `Message: python compiler not avaliable`
+    loading.value = false
+    emit('press:run', output.value)
+  },
 }
 
 const handleKeydown = (event) => {
@@ -145,14 +171,13 @@ const runOnMount = () => {
 
   window.addEventListener('keydown', handleKeydown)
 
-  const lang = props.lang || __('javascript')
   if (props.store) {
-    code.value = localStorage.getItem(lang)
+    code.value = localStorage.getItem(lang.value)
   } else {
-    code.value = templates[lang]
+    code.value = templates[lang.value]
   }
   if (props.run) {
-    execute[lang]()
+    execute[lang.value]()
   }
 }
 

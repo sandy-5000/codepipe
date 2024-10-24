@@ -2,20 +2,22 @@
   <NuxtLayout :name="layout" :title="title">
     <chat-window></chat-window>
     <message-alert :message="message" @close="(x) => (message = x)" />
-    <div class="bg-site py-5 h-[600px] w-full px-2 md:px-5 lg:px-10">
+    <div class="bg-site pt-4 pb-5 h-[600px] w-full px-2 md:px-5 lg:px-10">
       <div class="h-full rounded-lg">
         <code-editor
           store
           v-model:data="data"
-          lang="javascript"
+          v-model:language="lang"
           @update:code="(x) => handleCodeUpdate(x)"
           @press:run="(x) => console.log('output: ', x)"
         ></code-editor>
       </div>
     </div>
     <div v-if="session._id">
-      <div class="pb-5 px-5 flex flex-col-reverse md:flex-row justify-between">
-        <div class="px-4 mt-3 md:mt-0">
+      <div
+        class="pb-5 px-2 md:px-5 lg:px-10 flex flex-col-reverse md:flex-row justify-between"
+      >
+        <div class="px-2 md:px-0 mt-3 md:mt-0">
           <ui-input-label value="Channel ID" />
           <div class="relative w-[170px]">
             <div
@@ -92,7 +94,7 @@ const { $socket } = useNuxtApp()
 const layout = 'main-layout'
 const title = 'Editor'
 const data = ref('')
-const lang = ref('')
+const lang = ref('javascript')
 
 const { session } = await useSession()
 
@@ -103,6 +105,7 @@ const channelId = useState('channelId', () => '')
 const inputChannelId = useState('inputChannelId', () => '')
 const message = useState('message', () => '')
 const previousCode = useState('previousCode', () => '')
+const previousLang = useState('previousLang', () => 'javascript')
 
 const loading = useState('loading', () => {
   return {
@@ -117,11 +120,12 @@ const handleMulticast = ({ sender_id, language, code }) => {
   }
   lang.value = language
   data.value = code
+  previousLang.value = language
   previousCode.value = code
 }
 
 const handleCodeUpdate = (code) => {
-  if (previousCode.value == code) {
+  if (previousCode.value == code && previousLang.value == lang.value) {
     return
   }
   const channel_id = localStorage.getItem('channel_id')
