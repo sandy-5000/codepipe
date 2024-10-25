@@ -36,13 +36,12 @@
           >
         </div>
         <div class="h-[40px] flex justify-between">
-          <ui-select
+          <code-editor-language
             v-model:value="lang"
             :options="languageOptions"
-            @update:option="(x) => (lang = x)"
             class="h-full"
           />
-          <ui-button-secondary>Save</ui-button-secondary>
+          <code-editor-options class="h-full" />
         </div>
         <div class="v-center h-[30px]">
           <p class="text-xs uppercase text-site-content">Output:</p>
@@ -82,12 +81,11 @@ const options = {
   automaticLayout: true,
 }
 
-const emit = defineEmits(['update:code', 'press:run'])
+const emit = defineEmits(['press:run'])
 watch(code, (value) => {
   if (props.store) {
     localStorage.setItem(lang.value, value)
   }
-  emit('update:code', value)
 })
 watch(lang, (value) => {
   let savedCode = ''

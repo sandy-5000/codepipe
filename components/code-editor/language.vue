@@ -2,14 +2,14 @@
 .select-options-close {
   z-index: -1;
   opacity: 0;
-  transform: scale(0.9) translateY(-20%);
+  transform: translateX(-20%);
   transition: 0.2s;
 }
 
 .select-options-open {
-  z-index: 2;
+  z-index: 30;
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: translateX(0);
 }
 </style>
 
@@ -22,7 +22,7 @@
     </ui-button-primary>
     <div
       :class="{
-        'absolute top-full left-0 w-full rounded-md bg-slate-100 opacity-40 py-2 min-w-16 max-w-40 select-options-close': true,
+        'absolute top-0 right-full w-full rounded-md bg-slate-100 opacity-40 py-2 mr-2 min-w-16 max-w-40 select-options-close': true,
         'select-options-open': show,
       }"
     >
@@ -44,11 +44,9 @@ const props = defineProps({
 
 const selected = defineModel('value', { default: 'javascript' })
 
-const emit = defineEmits(['update:option'])
 const handleSelect = (value) => {
   selected.value = value
   show.value = false
-  emit('update:option', value)
 }
 
 const show = ref(false)

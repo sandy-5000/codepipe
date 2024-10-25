@@ -13,6 +13,7 @@ import {
   faXmark,
   faPaperPlane,
   faArrowDown,
+  faFloppyDisk,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -25,7 +26,8 @@ library.add(
   faComments,
   faPaperPlane,
   faXmark,
-  faArrowDown
+  faArrowDown,
+  faFloppyDisk
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

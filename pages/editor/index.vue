@@ -8,7 +8,6 @@
           store
           v-model:data="data"
           v-model:language="lang"
-          @update:code="(x) => handleCodeUpdate(x)"
           @press:run="(x) => console.log('output: ', x)"
         ></code-editor>
       </div>
@@ -104,6 +103,7 @@ const codeSync = useState('codeSync', () => false)
 const channelId = useState('channelId', () => '')
 const inputChannelId = useState('inputChannelId', () => '')
 const message = useState('message', () => '')
+
 const previousCode = useState('previousCode', () => '')
 const previousLang = useState('previousLang', () => 'javascript')
 
@@ -124,8 +124,12 @@ const handleMulticast = ({ sender_id, language, code }) => {
   previousCode.value = code
 }
 
+watch(data, (value) => {
+  handleCodeUpdate(value)
+})
+
 const handleCodeUpdate = (code) => {
-  if (previousCode.value == code && previousLang.value == lang.value) {
+  if (previousCode.value === code && previousLang.value === lang.value) {
     return
   }
   const channel_id = localStorage.getItem('channel_id')
