@@ -7,7 +7,7 @@
 }
 
 .save-options-open {
-  z-index: 30;
+  z-index: 9;
   opacity: 1;
   transform: translateY(0);
 }
