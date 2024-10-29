@@ -1,3 +1,4 @@
+import { defineEventHandler } from 'h3'
 import Users from '~/server/models/user.model'
 import { Hash } from '~/server/utils/Hash'
 
@@ -5,16 +6,21 @@ export default defineEventHandler(async (event) => {
   try {
     const req = event.node.req
     const res = event.node.res
+    const session = event.context.session
     res.setHeader('Content-Type', 'application/json')
     if (req.method === 'PATCH') {
       const body = await readBody(event)
+      if (!body._id || !session._id || body._id != session._id) {
+        res.statusCode = 400
+        return res.end(str({ error: 'Invalid request' }))
+      }
       if (body.update === 'profile') {
         if (!body._id || !body.name || !body.email) {
           res.statusCode = 400
           return res.end(str({ error: 'Missing parameters' }))
         }
-        const responce = await patchProfile(body)
-        return res.end(str(responce))
+        const response = await patchProfile(body)
+        return res.end(str(response))
       } else if (body.update === 'passwd') {
         if (!body._id || !body.passwd || !body.npasswd) {
           res.statusCode = 400
@@ -30,6 +36,7 @@ export default defineEventHandler(async (event) => {
       return res.end(str({ error: 'Invalid Request' }))
     }
   } catch (e) {
+    console.error(e)
     return res.end(str({ error: e }))
   }
 })

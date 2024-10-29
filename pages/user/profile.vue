@@ -216,7 +216,7 @@ const layout = 'main-layout'
 const { session, update } = await useSession()
 const route = useRoute()
 if (!session.value || !session.value._id) {
-  navigateTo(`/login?redirect=${route.path}`)
+  const loginRoute = navigateTo(`/user/login?redirect=${route.path}`)
 }
 
 const defaultInfo = useState('defaultInfo', () => {
@@ -272,7 +272,7 @@ const handleProfileUpdate = async () => {
   const { name, email } = info.value.profile
   info.value.profile = { name: '', email: '' }
   if (!session.value || !session.value._id) {
-    navigateTo(`/login?redirect=${route.path}`)
+    navigateTo(`/user/login?redirect=${route.path}`)
     return
   }
   loading.value.profileUpdate = true
@@ -312,7 +312,7 @@ const handlePasswordUpdate = async () => {
   const { current, updated, confirm } = info.value.passwd
   info.value.passwd = { current: '', updated: '', confirm: '' }
   if (!session.value || !session.value._id) {
-    navigateTo(`/login?redirect=${route.path}`)
+    navigateTo(`/user/login?redirect=${route.path}`)
     return
   }
   if (updated !== confirm) {
