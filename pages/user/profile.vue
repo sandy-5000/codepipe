@@ -83,14 +83,17 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary type="submit" v-if="!loading.profileUpdate"
-                    >Save</ui-button-primary
-                  >
-                  <ui-button-loading v-if="loading.profileUpdate"
+                  <ui-button-loading v-if="loadingProfileUpdate"
                     >Updating...</ui-button-loading
                   >
-                  <p v-if="show.profileUpdated" class="text-sm text-label-dark">
-                    {{ show.profileUpdated }}
+                  <ui-button-primary type="submit" v-else
+                    >Save</ui-button-primary
+                  >
+                  <p
+                    v-if="messageProfileUpdated !== __('')"
+                    class="text-sm text-label-dark"
+                  >
+                    {{ messageProfileUpdated }}
                   </p>
                 </div>
               </form>
@@ -168,19 +171,17 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                  <ui-button-primary
-                    type="submit"
-                    v-if="!loading.passwordUpdate"
-                    >Save</ui-button-primary
-                  >
-                  <ui-button-loading v-if="loading.passwordUpdate"
+                  <ui-button-loading v-if="loadingPasswdUpdate"
                     >Updating...</ui-button-loading
                   >
+                  <ui-button-primary type="submit" v-else
+                    >Save</ui-button-primary
+                  >
                   <p
-                    v-if="show.passwordUpdated"
+                    v-if="messagePasswordUpdated !== __('')"
                     class="text-sm text-label-dark"
                   >
-                    {{ show.passwordUpdated }}
+                    {{ messagePasswordUpdated }}
                   </p>
                 </div>
               </form>
@@ -240,33 +241,25 @@ const info = useState('info', () => {
   }
 })
 
-const show = useState('show', () => {
-  return {
-    profileUpdated: '',
-    passwordUpdated: '',
-  }
-})
+const messageProfileUpdated = ref('')
+const messagePasswordUpdated = ref('')
 
 const profileUpdated = (message) => {
-  show.value.profileUpdated = message || 'Profile updated.'
+  messageProfileUpdated.value = message || 'Profile updated.'
   setTimeout(() => {
-    show.value.profileUpdated = ''
+    messageProfileUpdated.value = ''
   }, 5000)
 }
 
 const passwordUpdated = (message) => {
-  show.value.passwordUpdated = message || 'Password updated.'
+  messagePasswordUpdated.value = message || 'Password updated.'
   setTimeout(() => {
-    show.value.passwordUpdated = ''
+    messagePasswordUpdated.value = ''
   }, 5000)
 }
 
-const loading = useState('loading', () => {
-  return {
-    profileUpdate: false,
-    passwordUpdate: false,
-  }
-})
+const loadingProfileUpdate = ref(false)
+const loadingPasswdUpdate = ref(false)
 
 const handleProfileUpdate = async () => {
   const { name, email } = info.value.profile
@@ -275,7 +268,7 @@ const handleProfileUpdate = async () => {
     navigateTo(`/user/login?redirect=${route.path}`)
     return
   }
-  loading.value.profileUpdate = true
+  loadingProfileUpdate.value = true
   try {
     const response = await $fetch('/api/user/profile', {
       method: 'PATCH',
@@ -304,7 +297,7 @@ const handleProfileUpdate = async () => {
   } catch (e) {
     profileUpdated('Update Failed')
   } finally {
-    loading.value.profileUpdate = false
+    loadingProfileUpdate.value = false
   }
 }
 
@@ -319,7 +312,7 @@ const handlePasswordUpdate = async () => {
     passwordUpdated("Password did't match")
     return
   }
-  loading.value.passwordUpdate = true
+  loadingPasswdUpdate.value = true
   try {
     const response = await $fetch('/api/user/profile', {
       method: 'PATCH',
@@ -334,7 +327,7 @@ const handlePasswordUpdate = async () => {
   } catch (e) {
     passwordUpdated('Update Failed')
   } finally {
-    loading.value.passwordUpdate = false
+    loadingPasswdUpdate = false
   }
 }
 </script>

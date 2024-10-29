@@ -4,4 +4,9 @@ const uniqid = () => {
   return [timeStamp.slice(0, 4), timeStamp.slice(4, 8), random].join('-')
 }
 
-export { uniqid }
+const commitId = () => {
+  const timeStamp = Date.now().toString(36)
+  return timeStamp
+}
+
+export { uniqid, commitId }
