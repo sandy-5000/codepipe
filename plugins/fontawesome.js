@@ -4,6 +4,7 @@ import {
   faEye,
   faEyeSlash,
   faComments,
+  faFileLines,
 } from '@fortawesome/free-regular-svg-icons'
 import {
   faCode,
@@ -27,7 +28,8 @@ library.add(
   faPaperPlane,
   faXmark,
   faArrowDown,
-  faFloppyDisk
+  faFloppyDisk,
+  faFileLines
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

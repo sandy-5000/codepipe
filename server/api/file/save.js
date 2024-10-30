@@ -1,14 +1,13 @@
 import { defineEventHandler } from 'h3'
 import Files from '~/server/models/file.model'
 import { commitId } from '~/server/utils/uniqid'
-import { Types } from 'mongoose'
 
 export default defineEventHandler(async (event) => {
+  const req = event.node.req
+  const res = event.node.res
+  const session = event.context.session
+  res.setHeader('Content-Type', 'application/json')
   try {
-    const req = event.node.req
-    const res = event.node.res
-    const session = event.context.session
-    res.setHeader('Content-Type', 'application/json')
     if (req.method === 'POST') {
       const body = await readBody(event)
       if (!body._id || !session._id || body._id != session._id) {
@@ -34,7 +33,7 @@ export default defineEventHandler(async (event) => {
 async function UpsertFile({ _id, file_name, data }) {
   await Files.findOneAndUpdate(
     {
-      user_id: Types.ObjectId(_id),
+      user_id: _id,
       name: file_name,
     },
     {
@@ -47,5 +46,6 @@ async function UpsertFile({ _id, file_name, data }) {
   )
   return {
     status: 'File Saved.',
+    code: 200,
   }
 }

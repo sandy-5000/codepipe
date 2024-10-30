@@ -9,10 +9,11 @@
           v-model:data="data"
           v-model:language="lang"
           @press:run="(x) => console.log('output: ', x)"
+          @update:message="(x) => (message = x)"
         ></code-editor>
       </div>
     </div>
-    <div v-if="session._id">
+    <div v-if="fileName === LINE && session._id">
       <div
         class="pb-5 px-2 md:px-5 lg:px-10 flex flex-col-reverse md:flex-row justify-between"
       >
@@ -86,7 +87,7 @@
 </template>
 
 <script setup>
-import { getUserId, validate } from '~/utils/helper'
+import { getUserId, validate, LINE } from '~/utils/helper'
 
 const { $socket } = useNuxtApp()
 
@@ -94,6 +95,8 @@ const layout = 'main-layout'
 const title = 'Editor'
 const data = ref('')
 const lang = ref('javascript')
+const route = useRoute()
+const fileName = ref((route.params.file_name || '').trim())
 
 const { session } = await useSession()
 
@@ -129,7 +132,10 @@ watch(data, (value) => {
 })
 
 const handleCodeUpdate = (code) => {
-  if (previousCode.value === code && previousLang.value === lang.value) {
+  if (
+    fileName.value != LINE ||
+    (previousCode.value === code && previousLang.value === lang.value)
+  ) {
     return
   }
   const channel_id = localStorage.getItem('channel_id')
@@ -152,6 +158,28 @@ const copyChannel = (channel_id, msg) => {
     .catch((err) => {
       console.log(err)
     })
+}
+
+const getFileData = async () => {
+  if (!session.value || !session.value._id) {
+    navigateTo(`/user/login?redirect=${route.path}`)
+    return
+  }
+  try {
+    const response = await $fetch('/api/file/content', {
+      method: 'POST',
+      body: {
+        _id: session.value._id,
+        file_name: fileName.value,
+      },
+    })
+    if (response.code == 404) {
+      return
+    }
+    data.value = response.data
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const createChannel = async () => {
@@ -243,7 +271,12 @@ const runOnMount = () => {
   inputChannelId.value = ''
   message.value = ''
   previousCode.value = data.value
-  socket.on('multicast', handleMulticast)
+  if (fileName.value === LINE) {
+    socket.on('multicast', handleMulticast)
+  } else {
+    data.value = ''
+    getFileData()
+  }
 }
 
 const runBeforeUnmount = () => {

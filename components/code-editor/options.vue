@@ -43,6 +43,8 @@
               name="file_name"
               @update:value="(x) => (body.file_name = x)"
               required
+              :value="fileName === LINE ? __('') : fileName"
+              :disabled="fileName !== LINE"
             ></ui-text-input>
           </div>
           <div class="mt-1">
@@ -60,7 +62,7 @@
             ></ui-textarea>
           </div>
           <div class="mt-4 flex justify-end">
-            <ui-button-loading v-if="loading" class="ms-3">
+            <ui-button-loading v-if="saving" class="ms-3">
               saving file...
             </ui-button-loading>
             <ui-button-primary v-else class="ms-3" type="submit">
@@ -74,9 +76,10 @@
 </template>
 
 <script setup>
-const props = defineProps({
-  fileName: String,
-})
+import { LINE } from '~/utils/helper'
+
+const route = useRoute()
+const fileName = ref((route.params.file_name || '').trim())
 
 const body = useState('body', () => {
   return {
@@ -85,12 +88,15 @@ const body = useState('body', () => {
   }
 })
 
-const emit = defineEmits(['save:file'])
-const handleSubmit = () => {
-  console.log(body.value)
-  show.value = false
-}
+const show = defineModel('show', false)
+const saving = defineModel('saving', false)
 
-const show = ref(false)
-const loading = ref(false)
+const emit = defineEmits(['file:saved'])
+const handleSubmit = () => {
+  let { file_name, commit_message } = body.value
+  if (fileName.value != LINE) {
+    file_name = (route.params.file_name || '').trim()
+  }
+  emit('file:saved', { file_name, commit_message })
+}
 </script>

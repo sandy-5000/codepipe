@@ -33,7 +33,7 @@
       </div>
       <div
         :class="{
-          'absolute top-full left-0 w-full rounded-md bg-site-lighter p-2 min-w-16 nav-options-close': true,
+          'absolute top-full left-0 w-full rounded-md bg-site-lighter ring-2 ring-over-site p-2 min-w-16 nav-options-close': true,
           'nav-options-open': options,
         }"
       >
@@ -41,12 +41,22 @@
           :to="ROUTES.USER.PROFILE"
           :class="{
             'block py-2 px-4 text-sm rounded-md cursor-pointer hover:bg-site text-site-content': true,
-            'text-site-content bg-site': route.path === ROUTES.USER.PROFILE,
+            'text-site-content bg-site rounded-none border-x-2 border-app':
+              route.path === ROUTES.USER.PROFILE,
           }"
           >Profile</NuxtLink
         >
+        <NuxtLink
+          :to="ROUTES.USER.FILES"
+          :class="{
+            'block mt-2 py-2 px-4 text-sm rounded-md cursor-pointer hover:bg-site text-site-content': true,
+            'text-site-content bg-site rounded-none border-x-2 border-app':
+              route.path === ROUTES.USER.FILES,
+          }"
+          >User Files</NuxtLink
+        >
         <span
-          class="block mt-1 py-2 px-4 text-sm rounded-md cursor-pointer hover:bg-site text-site-content"
+          class="block mt-2 py-2 px-4 text-sm rounded-md cursor-pointer hover:bg-site text-site-content"
           @click="logout"
           >Log Out</span
         >

@@ -17,22 +17,22 @@
         <div
           class="h-[60px] flex gap-2 justify-end items-center pr-2 overflow-x-scroll"
         >
-          <ui-button-secondary
+          <ui-button
             v-if="!loading"
-            class="ring-2 ring-site-content"
+            class="ring-2 text-site-content bg-site ring-over-site"
             @click="handleClear"
-            >Clear</ui-button-secondary
+            >Clear</ui-button
           >
           <ui-button-loading
             v-if="loading"
             class="ring-2 ring-site-content rounded-md"
             >Running...</ui-button-loading
           >
-          <ui-button-danger
+          <ui-button
             v-else
-            class="ring-2 bg-red-500 ring-red-500 text-site-content"
+            class="border-2 text-site-content border-over-site bg-red-500"
             @click="handleRunWithDelay(500)"
-            >Run</ui-button-danger
+            >Run</ui-button
           >
         </div>
         <div class="h-[40px] flex justify-between">
@@ -41,7 +41,13 @@
             :options="languageOptions"
             class="h-full"
           />
-          <code-editor-options class="h-full" />
+          <code-editor-options
+            v-if="session._id"
+            v-model:show="show"
+            v-model:saving="fileSavingInProgress"
+            @file:saved="handleFileSave"
+            class="h-full"
+          />
         </div>
         <div class="v-center h-[30px]">
           <p class="text-xs uppercase text-site-content">Output:</p>
@@ -59,6 +65,8 @@
 <script setup>
 import { __, templates } from '~/utils/helper'
 
+const { session } = await useSession()
+
 const props = defineProps({
   store: Boolean,
   lang: String,
@@ -75,13 +83,15 @@ const languageOptions = [
 
 const output = ref('')
 const loading = ref(false)
+const fileSavingInProgress = ref(false)
+const show = ref(false)
 
 const options = {
   theme: 'app-theme',
   automaticLayout: true,
 }
 
-const emit = defineEmits(['press:run'])
+const emit = defineEmits(['press:run', 'update:message'])
 watch(code, (value) => {
   if (props.store) {
     localStorage.setItem(lang.value, value)
@@ -97,6 +107,35 @@ watch(lang, (value) => {
 
 const handleClear = () => {
   output.value = ''
+}
+
+const handleFileSave = async ({ file_name, commit_message }) => {
+  if (!session.value || !session.value._id) {
+    navigateTo(`/user/login?redirect=${route.path}`)
+    return
+  }
+  fileSavingInProgress.value = true
+  try {
+    const response = await $fetch('/api/file/save', {
+      method: 'POST',
+      body: {
+        _id: session.value._id,
+        file_name,
+        data: code.value,
+      },
+    })
+    if (response.code === 200) {
+      emit('update:message', 'File Saving successfully')
+    } else {
+      emit('update:message', 'An Error occred while Saving the File')
+    }
+  } catch (e) {
+    console.log(e)
+    emit('update:message', 'An Error occred while Saving the File')
+  } finally {
+    fileSavingInProgress.value = false
+    show.value = false
+  }
 }
 
 const handleRunWithDelay = (delay) => {

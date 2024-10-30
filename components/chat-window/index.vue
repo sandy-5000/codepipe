@@ -19,7 +19,7 @@
   >
     <Button
       @click="show = true"
-      class="ring-4 ring-app-light rounded-full w-10 aspect-square bg-app-light a-center"
+      class="ring-4 ring-app-light rounded-full w-10 aspect-square bg-app a-center"
     >
       <div class="a-center">
         <font-awesome-icon

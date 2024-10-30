@@ -1,12 +1,16 @@
 const __ = (string) => string
 
+const LINE = '_____'
+
 const ROUTES = {
   HOME: '/home',
-  EDITOR: '/editor',
+  EDITOR: '/editor/_____',
+  EDITOR_FILE: '/editor/',
   USER: {
     LOGIN: '/user/login',
     REGISTER: '/user/register',
     PROFILE: '/user/profile',
+    FILES: '/user/files',
   },
   AUTH: {
     FORGET_PASSWORD: '/auth/forgot-password',
@@ -38,6 +42,7 @@ const getSiteName = () => 'CodeCargo'
 
 const templates = {
   javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to ${getSiteName()}.\`)\n`,
+  python: `\n# Write your code here\nprint(\`Hello User!,\\nWelcome to ${getSiteName()}.\`)\n`,
 }
 
-export { __, ROUTES, templates, uniqid, validate, getUserId, getSiteName }
+export { __, ROUTES, LINE, templates, uniqid, validate, getUserId, getSiteName }
