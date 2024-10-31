@@ -40,9 +40,29 @@ const getUserId = () => {
 
 const getSiteName = () => 'CodeCargo'
 
+const getLanguage = (fileName = '') => {
+  console.log(fileName)
+  const extention = fileName.split('.').pop()
+  const extentionMap = new Map([
+    ['js', 'javascript'],
+    ['py', 'python'],
+  ])
+  return extentionMap.get(extention)
+}
+
 const templates = {
   javascript: `\n/* Write your code here */\nconsole.log(\`Hello User!,\\nWelcome to ${getSiteName()}.\`)\n`,
   python: `\n# Write your code here\nprint(\`Hello User!,\\nWelcome to ${getSiteName()}.\`)\n`,
 }
 
-export { __, ROUTES, LINE, templates, uniqid, validate, getUserId, getSiteName }
+export {
+  __,
+  ROUTES,
+  LINE,
+  templates,
+  uniqid,
+  validate,
+  getUserId,
+  getSiteName,
+  getLanguage,
+}

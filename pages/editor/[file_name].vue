@@ -87,16 +87,19 @@
 </template>
 
 <script setup>
-import { getUserId, validate, LINE } from '~/utils/helper'
+import { getLanguage, getUserId, validate, LINE } from '~/utils/helper'
 
 const { $socket } = useNuxtApp()
 
 const layout = 'main-layout'
 const title = 'Editor'
-const data = ref('')
-const lang = ref('javascript')
 const route = useRoute()
 const fileName = ref((route.params.file_name || '').trim())
+
+console.log('lang', getLanguage(fileName.value))
+
+const data = ref('')
+const lang = ref(getLanguage(fileName.value) || 'javascript')
 
 const { session } = await useSession()
 

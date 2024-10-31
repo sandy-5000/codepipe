@@ -34,6 +34,8 @@ async function deleteContent({ _id, file_name }) {
     user_id: _id,
     name: file_name,
   })
-  console.log(file)
-  return { code: 204, message: 'Deleted Success fully' }
+  if (file.acknowledged && file.deletedCount == 1) {
+    return { code: 204, message: 'Deleted Success fully' }
+  }
+  return { code: 500, message: 'An Error occured while deleting' }
 }

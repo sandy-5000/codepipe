@@ -1,5 +1,35 @@
 <template>
-  <NuxtLayout :name="layout" title="Profile">
+  <NuxtLayout :name="layout" title="Files">
+    <popup-modal v-model:show="show">
+      <div class="px-3">
+        <p
+          class="italic border-b-2 border-over-site pt-4 pb-3 mb-3 text-site-content"
+        >
+          Confirm deleting the file `{{ fileToDelete }}`
+        </p>
+        <p class="text-site-content px-1 pt-5 my-auto text-sm">
+          Type <i class="font-semibold text-md">`{{ fileToDelete }}`</i> in the
+          text input to delete
+        </p>
+        <ui-text-input
+          class="mt-3"
+          @update:value="(x) => (inputField = x)"
+        ></ui-text-input>
+        <p class="text-site-content px-1 pt-5 my-auto text-sm">
+          Note: Deleting file
+          <i>`{{ fileToDelete }}`</i> is an irreversible operation.
+        </p>
+        <div class="flex justify-end py-5">
+          <ui-button-loading v-if="loading">Deleting...</ui-button-loading>
+          <ui-button-danger
+            v-else
+            @click="deleteFile"
+            :disabled="inputField != fileToDelete"
+            >Delete this file</ui-button-danger
+          >
+        </div>
+      </div>
+    </popup-modal>
     <message-alert :message="message" @close="(x) => (message = x)" />
     <header class="bg-site-light">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
@@ -25,8 +55,15 @@
             <NuxtLink :to="ROUTES.EDITOR_FILE + file.name">
               <ui-button-primary>View</ui-button-primary>
             </NuxtLink>
+            <!-- @click="() => deleteFile({ file_name: file.name })" -->
             <ui-button-danger
-              @click="() => deleteFile({ file_name: file.name })"
+              @click="
+                () => {
+                  inputField = ''
+                  fileToDelete = file.name
+                  show = true
+                }
+              "
               class="bg-site hover:bg-site-lighter ring-2 ring-over-site"
             >
               <span class="text-red-500 font-bold">Delete</span>
@@ -45,11 +82,16 @@ const layout = 'main-layout'
 const route = useRoute()
 const { session } = await useSession()
 if (!session.value || !session.value._id) {
-  const loginRoute = navigateTo(`/user/login?redirect=${route.path}`)
+  navigateTo(`/user/login?redirect=${route.path}`)
 }
 
 const message = useState('message', () => '')
 const files = useState('files', () => [])
+const show = ref(false)
+const loading = ref(false)
+
+const fileToDelete = ref('')
+const inputField = ref('')
 
 const getFiles = async () => {
   if (!session.value || !session.value._id) {
@@ -69,11 +111,16 @@ const getFiles = async () => {
 
 getFiles()
 
-const deleteFile = async ({ file_name }) => {
+const deleteFile = async () => {
   if (!session.value || !session.value._id) {
     navigateTo(`/user/login?redirect=${route.path}`)
     return
   }
+  if (fileToDelete.value != inputField.value) {
+    return
+  }
+  const file_name = fileToDelete.value
+  loading.value = true
   const response = await $fetch('/api/file/delete', {
     method: 'POST',
     body: {
@@ -84,6 +131,12 @@ const deleteFile = async ({ file_name }) => {
   if (response.code == 204) {
     files.value = files.value.filter((file) => file.name != file_name)
     message.value = `File '${file_name}' Deleted successfully`
+  } else {
+    message.value =
+      (response.message || 'Deletion Failed') + ` File '${file_name}'`
   }
+  inputField.value = ''
+  loading.value = false
+  show.value = false
 }
 </script>

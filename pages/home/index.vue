@@ -197,7 +197,7 @@ const grid = Array(25)
   .map(() => {
     return {
       value: Math.floor(Math.random() * 1331) % 4,
-      boxes: Array(50)
+      boxes: Array(75)
         .fill(undefined)
         .map(() => Math.floor(Math.random() * 1331) % 8),
     }

@@ -43,6 +43,9 @@ body {
   .bg-site-content {
     @apply bg-slate-100;
   }
+  .bg-site-modal {
+    @apply bg-[#0d15197f];
+  }
 
   .text-site {
     @apply text-[#0d1519];
