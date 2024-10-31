@@ -40,6 +40,7 @@ async function UpsertFile({ _id, file_name, data }) {
       $set: {
         data,
         last_commit: commitId(),
+        last_modified: Date.now(),
       },
     },
     { upsert: true, returnNewDocument: true }

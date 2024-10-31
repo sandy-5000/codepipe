@@ -15,7 +15,7 @@
 
 <template>
   <div class="relative">
-    <ui-button-primary @click="show = !show">
+    <ui-button-primary :disabled="fileName != LINE" @click="show = !show">
       <span class="w-20 text-center">
         {{ selected }}
       </span>
@@ -37,11 +37,15 @@
 </template>
 
 <script setup>
+import { LINE } from '~/utils/helper'
+
 const props = defineProps({
   options: Array,
   value: String,
 })
 
+const route = useRoute()
+const fileName = ref((route.params.file_name || '').trim())
 const selected = defineModel('value', { default: 'javascript' })
 
 const handleSelect = (value) => {

@@ -35,7 +35,7 @@ async function fileContent({ _id, file_name }) {
       user_id: _id,
       name: file_name,
     },
-    { name: 1, data: 1 }
+    { name: 1, data: 1, last_modified: 1 }
   )
   if (!file) {
     return { code: 404, error: 'File not found' }

@@ -24,6 +24,10 @@ const fileSchema = new mongoose.Schema({
       },
     },
   },
+  last_modified: {
+    type: Date,
+    default: Date.now(),
+  },
   data: {
     type: String,
     default: '',

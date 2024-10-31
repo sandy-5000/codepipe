@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="layout" title="Files">
+  <NuxtLayout :name="layout" title="File store">
     <popup-modal v-model:show="show">
       <div class="px-3">
         <p
@@ -33,41 +33,58 @@
     <message-alert :message="message" @close="(x) => (message = x)" />
     <header class="bg-site-light">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <p class="text-site-content font-normal text-md px-2">
-          User Saved Files
-        </p>
+        <p class="text-site-content font-normal text-md px-2">File Store</p>
       </div>
     </header>
     <div class="py-12 mx-2 md:mx-0">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <div
           v-for="file of files"
-          class="bg-site-light p-3 border-x-2 border-app flex justify-between"
+          class="mx-2 hover:md:border-l-8 border-app duration-150"
         >
-          <div class="flex a-center">
-            <font-awesome-icon
-              class="text-site-content pr-3 text-2xl"
-              icon="fa-regular fa-file-lines"
-            />
-            <span class="text-site-content">{{ file.name }}</span>
-          </div>
-          <div class="a-center gap-2">
-            <NuxtLink :to="ROUTES.EDITOR_FILE + file.name">
-              <ui-button-primary>View</ui-button-primary>
-            </NuxtLink>
-            <!-- @click="() => deleteFile({ file_name: file.name })" -->
-            <ui-button-danger
-              @click="
-                () => {
-                  inputField = ''
-                  fileToDelete = file.name
-                  show = true
-                }
-              "
-              class="bg-site hover:bg-site-lighter ring-2 ring-over-site"
-            >
-              <span class="text-red-500 font-bold">Delete</span>
-            </ui-button-danger>
+          <div class="border-x-4 border-app bg-site-light px-3 pt-3 pb-2">
+            <div class="flex justify-between">
+              <div class="flex flex-col justify-between">
+                <div class="flex">
+                  <font-awesome-icon
+                    class="text-site-content pr-3 text-3xl"
+                    icon="fa-regular fa-file-lines"
+                  />
+                  <span class="text-site-content font-semibold">{{
+                    file.name
+                  }}</span>
+                </div>
+                <div class="pt-3">
+                  <div class="text-site-content text-[11px] md:text-xs">
+                    <span>Last Modifed</span>
+                    <p class="lowercase border-b-2 border-app">
+                      {{
+                        new Date(file.last_modified).toLocaleDateString() +
+                        ' ' +
+                        new Date(file.last_modified).toLocaleTimeString()
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="a-center gap-2">
+                <NuxtLink :to="ROUTES.EDITOR_FILE + file.name">
+                  <ui-button-primary>View</ui-button-primary>
+                </NuxtLink>
+                <ui-button-danger
+                  @click="
+                    () => {
+                      inputField = ''
+                      fileToDelete = file.name
+                      show = true
+                    }
+                  "
+                  class="bg-site hover:bg-site-lighter ring-2 ring-over-site"
+                >
+                  <span class="text-red-500 font-bold">Delete</span>
+                </ui-button-danger>
+              </div>
+            </div>
           </div>
         </div>
       </div>
