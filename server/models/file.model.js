@@ -12,7 +12,7 @@ const fileSchema = new mongoose.Schema({
     maxlength: 50,
     validate: {
       validator: (v) => {
-        return /^[a-zA-Z ]+$/.test(v)
+        return /^[a-zA-Z0-9._-]+$/.test(v)
       },
     },
   },

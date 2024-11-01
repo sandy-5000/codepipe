@@ -36,16 +36,25 @@
         <form @submit.prevent="handleSubmit">
           <div class="mt-1">
             <ui-input-label for="file_name" :value="__('File Name')" />
-            <ui-text-input
-              id="file_name"
-              className="block mt-1 w-full text-sm"
-              type="text"
-              name="file_name"
-              @update:value="(x) => (body.file_name = x)"
-              required
-              :value="fileName === LINE ? __('') : fileName"
-              :disabled="fileName !== LINE"
-            ></ui-text-input>
+            <div class="flex w-full">
+              <div class="w-11/12 pr-1">
+                <ui-text-input
+                  id="file_name"
+                  className="block mt-1 w-full text-sm"
+                  type="text"
+                  name="file_name"
+                  @update:value="(x) => (body.file_name = x)"
+                  required
+                  :value="fileName === LINE ? __('') : fileName"
+                  :disabled="!isLINE"
+                ></ui-text-input>
+              </div>
+              <div class="w-1/12 v-center">
+                <span class="text-md text-site-content">
+                  {{ '.' + (getExtension(lang) || 'js') }}
+                </span>
+              </div>
+            </div>
           </div>
           <div class="mt-1">
             <ui-input-label
@@ -76,10 +85,14 @@
 </template>
 
 <script setup>
-import { LINE } from '~/utils/helper'
+import { getExtension, LINE } from '~/utils/helper'
 
 const route = useRoute()
-const fileName = ref((route.params.file_name || '').trim())
+const isLINE = ref((route.params.file_name || '').trim() === LINE)
+
+const fileNameWithExtention = (route.params.file_name || '').trim().split('.')
+fileNameWithExtention.pop()
+const fileName = ref(fileNameWithExtention.join('.'))
 
 const body = useState('body', () => {
   return {
@@ -88,13 +101,15 @@ const body = useState('body', () => {
   }
 })
 
-const show = defineModel('show', false)
-const saving = defineModel('saving', false)
+const show = defineModel('show', { default: false })
+const saving = defineModel('saving', { default: false })
+const lang = defineModel('lang', { default: 'javascript' })
 
 const emit = defineEmits(['file:saved'])
 const handleSubmit = () => {
   let { file_name, commit_message } = body.value
-  if (fileName.value != LINE) {
+  file_name = file_name + '.' + (getExtension(lang.value) || 'js')
+  if (!isLINE.value) {
     file_name = (route.params.file_name || '').trim()
   }
   emit('file:saved', { file_name, commit_message })

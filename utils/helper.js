@@ -41,13 +41,32 @@ const getUserId = () => {
 const getSiteName = () => 'CodeCargo'
 
 const getLanguage = (fileName = '') => {
-  console.log(fileName)
   const extention = fileName.split('.').pop()
   const extentionMap = new Map([
     ['js', 'javascript'],
     ['py', 'python'],
   ])
   return extentionMap.get(extention)
+}
+
+const getExtension = (language) => {
+  const languageMap = new Map([
+    ['javascript', 'js'],
+    ['python', 'py'],
+  ])
+  return languageMap.get(language)
+}
+
+const getTimeStamp = (timeStamp) => {
+  const date = new Date(timeStamp)
+  return [
+    [
+      (date.getDate() + '').padStart(2, '0'),
+      (date.getMonth() + 1 + '').padStart(2, '0'),
+      date.getFullYear(),
+    ].join('/'),
+    date.toLocaleTimeString(),
+  ].join(', ')
 }
 
 const templates = {
@@ -65,4 +84,6 @@ export {
   getUserId,
   getSiteName,
   getLanguage,
+  getExtension,
+  getTimeStamp,
 }

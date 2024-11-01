@@ -44,6 +44,7 @@
           <code-editor-options
             v-if="session._id"
             v-model:show="show"
+            v-model:lang="lang"
             v-model:saving="fileSavingInProgress"
             @file:saved="handleFileSave"
             class="h-full"
@@ -72,6 +73,9 @@ const props = defineProps({
   lang: String,
   run: Boolean,
 })
+
+const route = useRoute()
+const isLINE = ref((route.params.file_name || '').trim() === LINE)
 
 const code = defineModel('data', '')
 const lang = defineModel('language', { default: 'javascript' })
@@ -117,15 +121,15 @@ const handleFileSave = async ({ file_name, commit_message }) => {
   fileSavingInProgress.value = true
   try {
     const response = await $fetch('/api/file/save', {
-      method: 'POST',
+      method: isLINE.value ? 'POST' : 'PUT',
       body: {
         _id: session.value._id,
         file_name,
         data: code.value,
       },
     })
-    if (response.code === 200) {
-      emit('update:message', 'File Saving successfully')
+    if (response.code === 200 || response.code === 400) {
+      emit('update:message', response.status)
     } else {
       emit('update:message', 'An Error occred while Saving the File')
     }

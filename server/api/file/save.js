@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const session = event.context.session
   res.setHeader('Content-Type', 'application/json')
   try {
-    if (req.method === 'POST') {
+    if (req.method === 'POST' || req.method === 'PUT') {
       const body = await readBody(event)
       if (!body._id || !session._id || body._id != session._id) {
         res.statusCode = 400
@@ -18,8 +18,13 @@ export default defineEventHandler(async (event) => {
         res.statusCode = 400
         return res.end(str({ error: 'Missing parameters' }))
       }
-      const response = await UpsertFile(body)
-      return res.end(str(response))
+      if (req.method === 'POST') {
+        const response = await CreateFile(body)
+        return res.end(str(response))
+      } else {
+        const response = await UpdateFile(body)
+        return res.end(str(response))
+      }
     } else {
       res.statusCode = 405
       return res.end(str({ error: 'Invalid Request' }))
@@ -48,5 +53,50 @@ async function UpsertFile({ _id, file_name, data }) {
   return {
     status: 'File Saved.',
     code: 200,
+  }
+}
+
+async function CreateFile({ _id, file_name, data }) {
+  let file = new Files({
+    user_id: _id,
+    name: file_name,
+    data,
+    last_commit: commitId(),
+    last_modified: Date.now(),
+  })
+  let errors = {
+    11000: 'File name already exists, File not Created!',
+  }
+  try {
+    await file.save()
+    return { code: 200, status: 'File Created Successfully.' }
+  } catch (e) {
+    console.log(e)
+    return {
+      code: 400,
+      status: errors[e.code] || 'File Creation failed!',
+    }
+  }
+}
+
+async function UpdateFile({ _id, file_name, data }) {
+  console.log({ _id, file_name })
+  const file = await Files.findOne({
+    user_id: _id,
+    name: file_name,
+  })
+  if (!file) {
+    return {
+      code: 400,
+      status: 'Updating File Failed',
+    }
+  }
+  file.data = data
+  file.last_commit = commitId()
+  file.last_modified = Date.now()
+  await file.save()
+  return {
+    code: 200,
+    status: 'File Updated successfully',
   }
 }

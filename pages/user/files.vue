@@ -57,12 +57,8 @@
                 <div class="pt-3">
                   <div class="text-site-content text-[11px] md:text-xs">
                     <span>Last Modifed</span>
-                    <p class="lowercase border-b-2 border-app">
-                      {{
-                        new Date(file.last_modified).toLocaleDateString() +
-                        ' ' +
-                        new Date(file.last_modified).toLocaleTimeString()
-                      }}
+                    <p class="border-b-2 border-app lowercase">
+                      {{ getTimeStamp(file.last_modified) }}
                     </p>
                   </div>
                 </div>
@@ -93,7 +89,7 @@
 </template>
 
 <script setup>
-import { ROUTES } from '~/utils/helper'
+import { getTimeStamp, ROUTES } from '~/utils/helper'
 
 const layout = 'main-layout'
 const route = useRoute()
