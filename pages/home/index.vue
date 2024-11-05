@@ -40,17 +40,18 @@
           <p class="text-center text-sm font-normal pt-2">
             Welcome to
             <span class="logo-text-bright text-md font-semibold">
-              {{ getSiteName() }} </span
-            >🥱, for a good javascript coding experiences.
+              {{ getSiteName() }}
+            </span>
+            👻, for a good javascript coding experiences.
           </p>
           <p class="text-center text-sm font-normal pt-2">
             <span class="logo-text-bright text-md font-semibold">
               {{ getSiteName() }}
             </span>
             is a collaborative platform for seamless real-time code syncing
-            within channels. 😪... Instantly share and update code across users,
+            within channels. Instantly share and update code across users,
             ensuring everyone is always working on the latest version, and some
-            more, didn't have energy to say all here 😑, go find it yourself.
+            more, didn't have energy to say all here 🫥, go find it yourself.
           </p>
         </div>
       </div>
@@ -61,7 +62,7 @@
               class="group hover:scale-105 duration-300 ring-4 ring-site bg-slate-100 bg-opacity-40 rounded-2xl p-2"
             >
               <Button
-                class="ring-4 ring-app-light rounded-lg z-[1] py-4 px-12 bg-site-light text-site-content a-center"
+                class="rounded-lg z-[1] py-4 px-12 bg-site-light text-site-content a-center"
               >
                 <div class="a-center group-hover:scale-[0.96] duration-300">
                   <font-awesome-icon

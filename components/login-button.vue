@@ -69,7 +69,7 @@
     >
       <NuxtLink
         :to="`${ROUTES.USER.LOGIN}?redirect=${route.path}`"
-        class="font-semibold text-label-dark hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+        class="font-semibold text-label-dark hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500"
       >
         Log in</NuxtLink
       >

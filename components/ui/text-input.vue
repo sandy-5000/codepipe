@@ -8,7 +8,7 @@
       :required="required || false"
       :id="id"
       :class="{
-        'text-input w-full placeholder-app placeholder:text-sm border-over-site bg-site border-2 outline-none text-label h-10 px-3 focus:border-app-light focus:ring-app-light rounded-md shadow-sm': true,
+        'text-input w-full placeholder-app placeholder:text-sm border-over-site bg-site border-2 outline-none text-label h-10 px-3 focus:border-app focus:ring-app rounded-md shadow-sm': true,
         'pr-8': type === __('password'),
         [className]: true,
       }"

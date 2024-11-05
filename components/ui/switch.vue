@@ -31,15 +31,15 @@
 }
 
 .checkbox:checked ~ .background {
-  background-color: #ff9900;
-  border-color: #ff9900;
+  background-color: #8597ff;
+  border-color: #8597ff;
   transition: all 250ms ease;
 }
 
 .checkbox:checked ~ .circle {
   transform: translateX(100%);
   transition: all 250ms ease;
-  outline-color: #ff9900;
+  outline-color: #8597ff;
   background-color: #111827;
 }
 </style>

@@ -38,7 +38,7 @@ const getUserId = () => {
   return user_id
 }
 
-const getSiteName = () => 'CodeCargo'
+const getSiteName = () => 'Darkube'
 
 const getLanguage = (fileName = '') => {
   const extention = fileName.split('.').pop()

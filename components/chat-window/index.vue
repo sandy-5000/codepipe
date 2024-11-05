@@ -19,11 +19,11 @@
   >
     <Button
       @click="show = true"
-      class="ring-4 ring-app-light rounded-full w-10 aspect-square bg-app a-center"
+      class="rounded-full bg-site-light ring-2 ring-site w-10 aspect-square a-center"
     >
       <div class="a-center">
         <font-awesome-icon
-          class="text-site text-xl"
+          class="text-site-content text-xl"
           icon="fa-regular fa-comments"
         />
       </div>
@@ -38,7 +38,7 @@
   >
     <div class="p-3 flex justify-between h-[60px]">
       <button
-        class="a-center rounded-md aspect-square px-0 ring-2 ring-app-light text-site-content"
+        class="a-center rounded-md aspect-square px-0 ring-2 ring-app text-site-content"
         @click="show = false"
       >
         <font-awesome-icon class="text-lg" icon="fa-solid fa-xmark" />
@@ -73,11 +73,12 @@
     <div class="h-[70px]">
       <form @submit.prevent="handleChatSubmit">
         <div class="h-[65px] py-2 px-3 relative">
-          <input
+          <textarea
             v-model="messageBox"
             placeholder="Message"
-            class="text-sm outline-none border-2 border-over-site focus:border-app-light px-3 pr-[100px] rounded-lg w-full h-full text-site-content bg-site-light"
-          />
+            rows="1"
+            class="text-sm outline-none py-3 resize-none border-2 border-over-site focus:border-app px-3 pr-[100px] rounded-lg w-full text-site-content bg-site-light"
+          ></textarea>
           <div
             class="absolute h-full top-0 right-0 py-3 pr-4 flex flex-col justify-center"
           >

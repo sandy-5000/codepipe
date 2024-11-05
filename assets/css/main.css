@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #8597ff;
+  --primary-light: #b578ff;
+  --primary-shift: #ce78ff;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }
@@ -60,10 +66,10 @@ body {
   }
 
   .text-app {
-    color: #ff9900;
+    @apply text-[--primary];
   }
   .text-app-light {
-    @apply text-orange-300;
+    @apply text-[--primary-light];
   }
 
   .text-button {
@@ -87,27 +93,30 @@ body {
   }
 
   .bg-app {
-    @apply bg-[#ff9900];
+    @apply bg-[--primary];
   }
   .bg-app-light {
-    @apply bg-orange-300;
+    @apply bg-[--primary-light];
   }
   .bg-app-grad {
-    background: linear-gradient(to right, #ff9900aa 0%, #ffe078cc 100%);
+    /* background: linear-gradient(to right, #ff9900aa 0%, #ffe078cc 100%); */
+    background: linear-gradient(to right, #8597ffaa 0%, #ce78ffcc 100%);
   }
 
   .border-app {
-    @apply border-[#ff9900];
+    @apply border-[--primary];
   }
   .border-app-light {
-    @apply border-orange-300;
+    /* @apply border-orange-300; */
+    @apply border-[--primary-light];
   }
 
   .ring-app {
-    @apply ring-[#ff9900];
+    @apply ring-[--primary];
   }
   .ring-app-light {
-    @apply ring-orange-300;
+    /* @apply ring-orange-300; */
+    @apply border-[--primary-light];
   }
 
   .ring-site {
@@ -208,23 +217,33 @@ body {
 .logo-text {
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: linear-gradient(to right, #ff9900 0%, #ffe078 100%);
+  /* background: linear-gradient(to right, #ff9900 0%, #ffe078 100%); */
+  background: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    var(--primary-shift) 100%
+  );
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .logo-text-bright {
-  background: linear-gradient(to right, #ff9900 0%, #ffe078 100%);
+  /* background: linear-gradient(to right, #ff9900 0%, #ffe078 100%); */
+  background: linear-gradient(
+    to right,
+    var(--primary) 0%,
+    var(--primary-shift) 100%
+  );
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .box-grad {
-  box-shadow: 0px 0px 4px 2px #ff9900;
+  box-shadow: 0px 0px 4px 2px var(--primary);
   border-radius: 0.075rem;
 }
 
 .box-grad:hover {
-  box-shadow: 0px 0px 6px 3px #ffbe78;
+  box-shadow: 0px 0px 6px 3px var(--primary-light);
   border-radius: 0.125rem;
 }

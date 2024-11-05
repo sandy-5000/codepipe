@@ -204,7 +204,7 @@ const runOnMount = () => {
   $monaco.editor.defineTheme('app-theme', {
     base: 'vs-dark',
     inherit: true,
-    rules: [{ token: 'keyword', foreground: 'ff9900' }],
+    rules: [{ token: 'keyword', foreground: '8597ff' }],
     colors: {
       'editor.background': '#131e24',
     },

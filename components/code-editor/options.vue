@@ -112,6 +112,9 @@ const handleSubmit = () => {
   if (!isLINE.value) {
     file_name = (route.params.file_name || '').trim()
   }
+  if (file_name == (getExtension(lang.value) || 'js')) {
+    return
+  }
   emit('file:saved', { file_name, commit_message })
 }
 </script>
