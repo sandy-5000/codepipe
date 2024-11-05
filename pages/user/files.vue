@@ -39,46 +39,68 @@
     <div class="py-12 mx-2 md:mx-0">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <div
-          v-for="file of files"
-          class="mx-2 hover:md:border-l-8 border-app duration-150"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
         >
-          <div class="border-x-4 border-app bg-site-light px-3 pt-3 pb-2">
-            <div class="flex justify-between">
-              <div class="flex flex-col justify-between">
-                <div class="flex">
-                  <font-awesome-icon
-                    class="text-site-content pr-3 text-3xl"
-                    icon="fa-regular fa-file-lines"
-                  />
-                  <span class="text-site-content font-semibold">{{
-                    file.name
-                  }}</span>
-                </div>
-                <div class="pt-3">
-                  <div class="text-site-content text-[11px] md:text-xs">
-                    <span>Last Modifed</span>
-                    <p class="border-b-2 border-app lowercase">
-                      {{ getTimeStamp(file.last_modified) }}
-                    </p>
+          <div v-for="file of files">
+            <div
+              class="rounded-sm hover:md:border-l-[15px] duration-150 border-l-4 border-app bg-site-light px-3 pt-3 pb-2"
+            >
+              <div>
+                <div class="flex flex-col justify-between pt-2">
+                  <div class="flex">
+                    <font-awesome-icon
+                      class="text-site-content pr-3 text-3xl"
+                      icon="fa-solid fa-file-invoice"
+                    />
+                    <code class="v-center">
+                      <span class="text-site-content font-semibold">{{
+                        file.name
+                      }}</span>
+                    </code>
+                  </div>
+                  <div class="pt-5">
+                    <div class="text-site-content text-[11px] md:text-xs">
+                      <code>
+                        <span class="border-b-2 border-app mb-4">Details:</span>
+                        <p class="pt-2">
+                          File Name:
+                          <span class="normal-case">
+                            {{ file.name }}
+                          </span>
+                        </p>
+                        <p>
+                          Last Modifed:
+                          <span class="lowercase">
+                            {{ getTimeStamp(file.last_modified) }}
+                          </span>
+                        </p>
+                        <p>
+                          Last commit:
+                          <span class="normal-case">
+                            {{ file.last_commit }}
+                          </span>
+                        </p>
+                      </code>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="a-center gap-2">
-                <NuxtLink :to="ROUTES.EDITOR_FILE + file.name">
-                  <ui-button-primary>View</ui-button-primary>
-                </NuxtLink>
-                <ui-button-danger
-                  @click="
-                    () => {
-                      inputField = ''
-                      fileToDelete = file.name
-                      show = true
-                    }
-                  "
-                  class="bg-site hover:bg-site-lighter ring-2 ring-over-site"
-                >
-                  <span class="text-red-500 font-bold">Delete</span>
-                </ui-button-danger>
+                <div class="flex justify-end gap-2 pt-8 pb-2">
+                  <NuxtLink :to="ROUTES.EDITOR_FILE + file.name">
+                    <ui-button-primary>View</ui-button-primary>
+                  </NuxtLink>
+                  <ui-button-danger
+                    @click="
+                      () => {
+                        inputField = ''
+                        fileToDelete = file.name
+                        show = true
+                      }
+                    "
+                    class="bg-site hover:bg-site-lighter ring-2 ring-over-site"
+                  >
+                    <span class="text-red-500 font-bold">Delete</span>
+                  </ui-button-danger>
+                </div>
               </div>
             </div>
           </div>
