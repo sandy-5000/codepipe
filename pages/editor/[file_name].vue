@@ -96,8 +96,6 @@ const title = 'Editor'
 const route = useRoute()
 const fileName = ref((route.params.file_name || '').trim())
 
-console.log('lang', getLanguage(fileName.value))
-
 const data = ref('')
 const lang = ref(getLanguage(fileName.value) || 'javascript')
 
