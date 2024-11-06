@@ -8,7 +8,7 @@
   >
     <div
       :class="{
-        'w-10/12 bg-site rounded-lg border-2 p-3 my-1 border-app-light': true,
+        'w-10/12 bg-site rounded-lg border-2 p-3 my-1 border-app': true,
         'rounded-bl-md': mtype === 'receive',
         'rounded-br-md': mtype === 'sender',
       }"
