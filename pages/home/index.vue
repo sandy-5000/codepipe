@@ -42,7 +42,7 @@
             <span class="logo-text-bright text-md font-semibold">
               {{ getSiteName() }}
             </span>
-            👻, for a good javascript coding experiences.
+            , for a good javascript coding experiences.
           </p>
           <p class="text-center text-sm font-normal pt-2">
             <span class="logo-text-bright text-md font-semibold">
@@ -51,7 +51,7 @@
             is a collaborative platform for seamless real-time code syncing
             within channels. Instantly share and update code across users,
             ensuring everyone is always working on the latest version, and some
-            more, didn't have energy to say all here 🫥, go find it yourself.
+            more, didn't have energy to say all here, go find it yourself.
           </p>
         </div>
       </div>
