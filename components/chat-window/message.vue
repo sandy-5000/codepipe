@@ -17,9 +17,9 @@
         <icons-person></icons-person>
         <span class="text-label-dark text-xs">{{ user }}</span>
       </div>
-      <p class="text-site-content mt-2 text-sm px-2">
+      <code class="text-site-content mt-2 text-sm px-2">
         <slot />
-      </p>
+      </code>
     </div>
   </div>
 </template>

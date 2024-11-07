@@ -20,6 +20,10 @@ body {
   background-color: #0d1519;
 }
 
+code {
+  white-space: pre-wrap;
+}
+
 @layer utilities {
   .a-center {
     @apply flex justify-center items-center;
