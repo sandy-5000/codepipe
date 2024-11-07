@@ -42,7 +42,7 @@
             class="h-full"
           />
           <code-editor-options
-            v-if="session._id"
+            v-if="route.path !== ROUTES.HOME && session._id"
             v-model:show="show"
             v-model:lang="lang"
             v-model:saving="fileSavingInProgress"
@@ -129,6 +129,9 @@ const handleFileSave = async ({ file_name, commit_message }) => {
       },
     })
     if (response.code === 200 || response.code === 400) {
+      if (response.code === 200 && isLINE.value) {
+        navigateTo(ROUTES.USER.FILES)
+      }
       emit('update:message', response.status)
     } else {
       emit('update:message', 'An Error occred while Saving the File')

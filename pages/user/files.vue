@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout :name="layout" title="File store">
+  <NuxtLayout :name="layout" title="Files">
     <popup-modal v-model:show="show">
       <div class="px-3">
         <p
@@ -33,7 +33,7 @@
     <message-alert :message="message" @close="(x) => (message = x)" />
     <header class="bg-site-light">
       <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-        <p class="text-site-content font-normal text-md px-2">File Store</p>
+        <p class="text-site-content font-normal text-md px-2">Files</p>
       </div>
     </header>
     <div class="py-12 mx-2 md:mx-0">
@@ -105,6 +105,30 @@
             </div>
           </div>
         </div>
+        <div v-if="!loading && files.length == 0" class="h-[300px] a-center">
+          <p class="text-site-content text-2xl font-semibold italic">
+            No Files Avaliable
+          </p>
+        </div>
+        <div v-if="loading" class="h-[300px] a-center">
+          <p class="text-site-content text-2xl font-semibold italic">
+            Fetching Files ...
+          </p>
+        </div>
+        <div class="a-center my-5 h-[200px]">
+          <NuxtLink :to="ROUTES.EDITOR">
+            <Button
+              class="border-2 disabled:opacity-50 disabled:cursor-not-allowed border-app rounded-lg z-[1] py-4 px-10 bg-site-lighter text-site-content a-center"
+            >
+              <font-awesome-icon
+                fill="#f1f5f9"
+                class="mr-3"
+                icon="fa-solid fa-file-circle-plus"
+              />
+              <span class="font-normal">Create File</span>
+            </Button>
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </NuxtLayout>
@@ -133,12 +157,14 @@ const getFiles = async () => {
     navigateTo(`/user/login?redirect=${route.path}`)
     return
   }
+  loading.value = true
   const response = await $fetch('/api/file/user_files', {
     method: 'POST',
     body: {
       _id: session.value._id,
     },
   })
+  loading.value = false
   if (Array.isArray(response)) {
     files.value = response
   }

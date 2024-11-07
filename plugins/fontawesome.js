@@ -15,6 +15,7 @@ import {
   faArrowDown,
   faFloppyDisk,
   faFileInvoice,
+  faFileCirclePlus,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -29,7 +30,8 @@ library.add(
   faXmark,
   faArrowDown,
   faFloppyDisk,
-  faFileInvoice
+  faFileInvoice,
+  faFileCirclePlus
 )
 
 export default defineNuxtPlugin((nuxtApp) => {

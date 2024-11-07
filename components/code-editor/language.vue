@@ -15,7 +15,10 @@
 
 <template>
   <div class="relative">
-    <ui-button-primary :disabled="fileName != LINE" @click="show = !show">
+    <ui-button-primary
+      :disabled="route.path != ROUTES.HOME && fileName != LINE"
+      @click="show = !show"
+    >
       <span class="w-20 text-center">
         {{ selected }}
       </span>
