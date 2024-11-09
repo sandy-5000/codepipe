@@ -87,6 +87,7 @@
 </template>
 
 <script setup>
+import { createError } from 'nuxt/app'
 import { getLanguage, getUserId, validate, LINE } from '~/utils/helper'
 
 const { $socket } = useNuxtApp()
@@ -175,11 +176,20 @@ const getFileData = async () => {
       },
     })
     if (response.code == 404) {
-      return
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'File Not Found',
+        message: `File '${fileName.value}' not found`,
+      })
     }
     data.value = response.data
   } catch (e) {
     console.log(e)
+    const error = useError()
+    error.value = createError({
+      statusCode: e.statusCode || 500,
+      message: e.message || 'An error occurred',
+    })
   }
 }
 
