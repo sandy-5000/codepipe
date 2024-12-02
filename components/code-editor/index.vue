@@ -216,7 +216,7 @@ const runOnMount = () => {
   window.addEventListener('keydown', handleKeydown)
 
   if (props.store) {
-    code.value = localStorage.getItem(lang.value)
+    code.value = localStorage.getItem(lang.value) || ''
   } else {
     code.value = templates[lang.value]
   }
